@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit_id">ID</string>
+    <string name="input_password">PASSWORD</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_sign_up">SignUp</string>
+    <string name="activity_sign_up">SignUp</string>
+    <string name="edit_password_check">password check</string>
+    <string name="edit_nickname">nickname</string>
+    <string name="text_password_check">duplicate Check</string>
+    <string name="btn_complete_sign_up">SignUp</string>
+    <string name="activity_new_write">New Post</string>
+    <string name="edit_search_keyword">Please enter your keyword to search.</string>
+    <string name="btn_complete_post">Share my post</string>
+</resources>

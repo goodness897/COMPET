@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="edit_id">아이디</string>
+    <string name="input_password">비밀번호</string>
+    <string name="btn_login">로그인</string>
+    <string name="btn_sign_up">가입하기</string>
+    <string name="activity_sign_up">회원가입</string>
+    <string name="edit_password_check">비밀번호 확인</string>
+    <string name="edit_nickname">닉네임</string>
+    <string name="text_password_check">중복확인</string>
+    <string name="btn_complete_sign_up">회원가입</string>
+    <string name="activity_new_write">글등록</string>
+    <string name="edit_search_keyword">내용을 입력해주세요</string>
+    <string name="btn_complete_post">공유하기</string>
+</resources>
