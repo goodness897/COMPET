@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     tabHost.setCurrentTabByTag(preTab);
                     Intent intent = new Intent(MainActivity.this, NewWriteActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 } else {
                     preTab = tabHost.getCurrentTabTag();
                 }

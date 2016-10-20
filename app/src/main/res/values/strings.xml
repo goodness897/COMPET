@@ -12,7 +12,9 @@
     <string name="edit_nickname">닉네임</string>
     <string name="text_duplicate_check">중복확인</string>
     <string name="btn_complete_sign_up">회원가입</string>
-    <string name="activity_new_write">글등록</string>
+    <string name="activity_new_write">새 글 등록</string>
     <string name="edit_search_keyword">내용을 입력해주세요</string>
     <string name="btn_complete_post">공유하기</string>
+    <string name="update_my_profile">프로필 편집</string>
+    <string name="activity_setting">설정</string>
 </resources>

@@ -76,12 +76,12 @@ public class HomeFragment extends Fragment {
                 sampleStringBuilder.append(sampleString);
             }
             Post p = new Post();
-            p.setCommetCount("+3");
+            p.setCommetCount("+" + r.nextInt(10));
             p.setDate("2016년 " + "10월 " + r.nextInt(30) + "일");
             p.setProfileImage(ContextCompat.getDrawable(getContext(), R.drawable.image_default_profile));
             p.setNickName("name " + i);
             p.setPostContent(sampleStringBuilder.toString() + i);
-            p.setImageCount("+2");
+            p.setImageCount("+" + r.nextInt(3));
             p.setPostImage(ContextCompat.getDrawable(getContext(), resIds[i % resIds.length]));
             mAdapter.add(p);
         }

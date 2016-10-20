@@ -12,4 +12,6 @@
     <string name="activity_new_write">New Post</string>
     <string name="edit_search_keyword">Please enter your keyword to search.</string>
     <string name="btn_complete_post">Share my post</string>
+    <string name="update_my_profile">Update Profile</string>
+    <string name="activity_setting">Setting</string>
 </resources>

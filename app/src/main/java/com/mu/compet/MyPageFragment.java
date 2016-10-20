@@ -4,6 +4,7 @@ package com.mu.compet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -12,7 +13,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.mu.compet.data.Post;
+
+import java.util.Random;
 
 
 /**
@@ -21,30 +28,15 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class MyPageFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    ListView listView;
+    MyPostAdapter mAdapter;
 
     public MyPageFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyPageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyPageFragment newInstance(String param1, String param2) {
+    public static MyPageFragment newInstance() {
         MyPageFragment fragment = new MyPageFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -66,16 +58,53 @@ public class MyPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
         initToolBar(getString(R.string.app_name), view);
         setHasOptionsMenu(true);
+        listView = (ListView) view.findViewById(R.id.listView);
+        mAdapter = new MyPostAdapter();
+        listView.setAdapter(mAdapter);
+
+        Button updateProfileButton = (Button) view.findViewById(R.id.btn_update_my_profile);
+        updateProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), UpdateMyProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        initData();
+
 
         return view;
+    }
+
+    int[] resIds = {R.drawable.image_sample_post};
+
+    String sampleString = "this is sample content ";
+
+    private void initData() {
+        StringBuilder sampleStringBuilder = new StringBuilder();
+        Random r = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < i; j++) {
+                sampleStringBuilder.append(sampleString);
+            }
+
+            Post p = new Post();
+            p.setCommetCount("+" + r.nextInt(10));
+            p.setPostContent(sampleStringBuilder.toString() + i);
+            p.setImageCount("+" + r.nextInt(3));
+            p.setPostImage(ContextCompat.getDrawable(getContext(), resIds[i % resIds.length]));
+            mAdapter.add(p);
+        }
     }
 
     private void initToolBar(String title, View view) {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.main_toolbar);
         TextView titleText = (TextView) view.findViewById(R.id.toolbar_title);
         titleText.setText(title);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
 
@@ -87,13 +116,17 @@ public class MyPageFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.action_setting :
+        switch (item.getItemId()) {
+            case R.id.action_setting:
                 Intent intent = new Intent(getContext(), SettingActivity.class);
                 startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateMyProfileClicked() {
+
     }
 
 }

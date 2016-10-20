@@ -16,12 +16,9 @@ import java.util.List;
 /**
  * Created by Mu on 2016-10-20.
  */
-public class PostAdapter extends BaseAdapter {
+public class MyPostAdapter extends BaseAdapter {
     private List<Post> items = new ArrayList<>();
 
-    private ImageView profileImageView;
-    private TextView nickNameTextView;
-    private TextView dateView;
     private ImageView postImageView;
     private TextView imageCountView;
     private TextView postContentView;
@@ -64,7 +61,7 @@ public class PostAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.view_post, parent, false);
+            convertView = inflater.inflate(R.layout.view_my_post, parent, false);
         }
 
         initView(convertView);
@@ -78,9 +75,7 @@ public class PostAdapter extends BaseAdapter {
     }
 
     private void initView(View v) {
-        profileImageView = (ImageView) v.findViewById(R.id.image_profile);
-        nickNameTextView = (TextView) v.findViewById(R.id.text_nickname);
-        dateView = (TextView) v.findViewById(R.id.text_post_date);
+
         postImageView = (ImageView) v.findViewById(R.id.image_post_first_image);
         imageCountView = (TextView) v.findViewById(R.id.text_image_count);
         postContentView = (TextView) v.findViewById(R.id.text_post_content);
@@ -90,9 +85,7 @@ public class PostAdapter extends BaseAdapter {
     }
 
     private void setBoardView(Post post) {
-        profileImageView.setImageDrawable(post.getProfileImage());
-        nickNameTextView.setText(post.getNickName());
-        dateView.setText(post.getDate());
+
         postImageView.setImageDrawable(post.getPostImage());
         imageCountView.setText(post.getImageCount());
         postContentView.setText(post.getPostContent());
