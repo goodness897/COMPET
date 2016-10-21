@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.mu.compet.MyPageFragment">
 
     <android.support.v7.widget.Toolbar
@@ -51,8 +52,9 @@
 
         <Button
             android:id="@+id/btn_update_my_profile"
+            android:background="@color/brightCoolGray"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="32dp"
             android:layout_gravity="center"
             android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"

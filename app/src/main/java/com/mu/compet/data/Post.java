@@ -7,13 +7,14 @@ import android.graphics.drawable.Drawable;
  */
 
 public class Post {
+
     private Drawable profileImage;
     private String nickName;
     private String date;
     private Drawable postImage;
     private String imageCount;
     private String postContent;
-    private String commetCount;
+    private String replyCount;
 
     public Drawable getProfileImage() {
         return profileImage;
@@ -63,11 +64,11 @@ public class Post {
         this.postContent = postContent;
     }
 
-    public String getCommetCount() {
-        return commetCount;
+    public String getReplyCount() {
+        return replyCount;
     }
 
-    public void setCommetCount(String commetCount) {
-        this.commetCount = commetCount;
+    public void setReplyCount(String replyCount) {
+        this.replyCount = replyCount;
     }
 }

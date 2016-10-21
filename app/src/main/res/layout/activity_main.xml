@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.mu.compet.MainActivity">
@@ -24,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginBottom="8dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@color/gray"/>
 
             <TabWidget
                 android:layout_width="match_parent"

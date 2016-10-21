@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.mu.compet.SearchFragment">
 
     <LinearLayout
@@ -13,24 +14,34 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_margin="16dp">
-        <Spinner
+
+       <!-- <Spinner
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:entries="@array/search_type"
-            android:id="@+id/spinner_search_type" />
+            android:id="@+id/spinner_search_type" />-->
+
         <EditText
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="@dimen/login_margin_left"
+            android:paddingLeft="@dimen/login_margin_left"
+            android:background="@drawable/edit_shape_solid"
             android:id="@+id/edit_search_keyword"
             android:hint="@string/edit_search_keyword"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:layout_height="wrap_content" />
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:theme="@style/SearchTextLabel"/>
+
         <Button
-            android:id="@+id/btn_search"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:id="@+id/btn_cancel"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_marginLeft="8dp"
-            android:background="@drawable/search_tab_selector"/>
+            android:background="@drawable/ic_cancel_circle"/>
     </LinearLayout>
 
     <FrameLayout

@@ -11,5 +11,13 @@
     <color name="subYellowColor">#FFAC00</color>
 
     <color name="postCount">#4D000000</color>
+    <color name="brightGray">#f9f9f9</color>
+    <color name="gray">#BCBCBC</color>
+    <color name="brightCoolGray">#EEF3F3</color>
+    <color name="coolGray">#D6DADA</color>
+    <color name="white">#ffffff</color>
+
+    <color name="textBlack">#353535</color>
+
 
 </resources>

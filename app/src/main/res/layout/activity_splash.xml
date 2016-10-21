@@ -9,21 +9,24 @@
     tools:context="com.mu.compet.SplashActivity">
 
     <TextView
-        android:text="@string/app_name"
-        android:textSize="48sp"
-        android:textColor="@android:color/white"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp" />
+        android:layout_marginTop="180dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="48sp" />
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:srcCompat="@drawable/ic_barking_dog"
+        android:src="@drawable/anim_splash"
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:id="@+id/imageView" />
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_barking_dog" />
+
 </RelativeLayout>

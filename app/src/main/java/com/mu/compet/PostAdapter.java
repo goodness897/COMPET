@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mu.compet.data.Post;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 public class PostAdapter extends BaseAdapter {
     private List<Post> items = new ArrayList<>();
+    Post post;
 
     private ImageView profileImageView;
     private TextView nickNameTextView;
@@ -66,18 +69,36 @@ public class PostAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.view_post, parent, false);
         }
-
-        initView(convertView);
-
-        Post board = items.get(position);
-
-        setBoardView(board);
-
-
+        post = items.get(position);
+        initView(convertView, post);
+        setBoardView(post);
         return convertView;
     }
 
-    private void initView(View v) {
+    public interface OnUserClickListener {
+        public void onUserClick(View view, Post post);
+    }
+
+    OnUserClickListener mListener;
+
+    public void setOnUserClickListener(OnUserClickListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnPostClickListener {
+        public void onPostClick(View view, Post post);
+    }
+
+    OnPostClickListener pListener;
+
+    public void setOnPostClickListener(OnPostClickListener listener) {
+        pListener = listener;
+    }
+
+    private void initView(View v, final Post post) {
+
+        LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.user_info_layout);
+        RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.post_info_layout);
         profileImageView = (ImageView) v.findViewById(R.id.image_profile);
         nickNameTextView = (TextView) v.findViewById(R.id.text_nickname);
         dateView = (TextView) v.findViewById(R.id.text_post_date);
@@ -86,6 +107,25 @@ public class PostAdapter extends BaseAdapter {
         postContentView = (TextView) v.findViewById(R.id.text_post_content);
         commentImageView = (ImageView) v.findViewById(R.id.image_comment);
         commentCountView = (TextView) v.findViewById(R.id.text_comment_count);
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onUserClick(v, post);
+                }
+
+            }
+        });
+
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pListener != null) {
+                    pListener.onPostClick(v, post);
+                }
+            }
+        });
 
     }
 
@@ -96,6 +136,6 @@ public class PostAdapter extends BaseAdapter {
         postImageView.setImageDrawable(post.getPostImage());
         imageCountView.setText(post.getImageCount());
         postContentView.setText(post.getPostContent());
-        commentCountView.setText(post.getCommetCount());
+        commentCountView.setText(post.getReplyCount());
     }
 }

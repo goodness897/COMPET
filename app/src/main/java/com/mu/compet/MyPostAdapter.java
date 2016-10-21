@@ -89,6 +89,6 @@ public class MyPostAdapter extends BaseAdapter {
         postImageView.setImageDrawable(post.getPostImage());
         imageCountView.setText(post.getImageCount());
         postContentView.setText(post.getPostContent());
-        commentCountView.setText(post.getCommetCount());
+        commentCountView.setText(post.getReplyCount());
     }
 }

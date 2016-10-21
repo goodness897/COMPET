@@ -77,7 +77,8 @@ public class MyPageFragment extends Fragment {
         return view;
     }
 
-    int[] resIds = {R.drawable.image_sample_post};
+    int[] resIds = {R.drawable.image_sample_post01, R.drawable.image_sample_post02
+            ,R.drawable.image_sample_post03, R.drawable.image_sample_post04};
 
     String sampleString = "this is sample content ";
 
@@ -91,7 +92,7 @@ public class MyPageFragment extends Fragment {
             }
 
             Post p = new Post();
-            p.setCommetCount("+" + r.nextInt(10));
+            p.setReplyCount("+" + r.nextInt(10));
             p.setPostContent(sampleStringBuilder.toString() + i);
             p.setImageCount("+" + r.nextInt(3));
             p.setPostImage(ContextCompat.getDrawable(getContext(), resIds[i % resIds.length]));

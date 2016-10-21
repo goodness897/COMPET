@@ -1,6 +1,7 @@
 package com.mu.compet;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -49,6 +50,23 @@ public class HomeFragment extends Fragment {
         initToolBar(getString(R.string.app_name), view);
         listView = (ListView) view.findViewById(R.id.listView);
         mAdapter = new PostAdapter();
+        mAdapter.setOnUserClickListener(new PostAdapter.OnUserClickListener() {
+            @Override
+            public void onUserClick(View view, Post post) {
+                String nickName = post.getNickName();
+                Intent intent = new Intent(getContext(), DetailUserActivity.class);
+                intent.putExtra("NickName", nickName);
+                startActivity(intent);
+
+            }
+        });
+        mAdapter.setOnPostClickListener(new PostAdapter.OnPostClickListener() {
+            @Override
+            public void onPostClick(View view, Post post) {
+                Intent intent = new Intent(getContext(), DetailPostActivity.class);
+                startActivity(intent);
+            }
+        });
         listView.setAdapter(mAdapter);
 
         initData();
@@ -63,7 +81,8 @@ public class HomeFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    int[] resIds = {R.drawable.image_sample_post};
+    int[] resIds = {R.drawable.image_sample_post01, R.drawable.image_sample_post02
+            ,R.drawable.image_sample_post03, R.drawable.image_sample_post04};
 
     String sampleString = "this is sample content ";
 
@@ -76,7 +95,7 @@ public class HomeFragment extends Fragment {
                 sampleStringBuilder.append(sampleString);
             }
             Post p = new Post();
-            p.setCommetCount("+" + r.nextInt(10));
+            p.setReplyCount("+" + r.nextInt(10));
             p.setDate("2016년 " + "10월 " + r.nextInt(30) + "일");
             p.setProfileImage(ContextCompat.getDrawable(getContext(), R.drawable.image_default_profile));
             p.setNickName("name " + i);

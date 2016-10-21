@@ -55,7 +55,8 @@ public class SearchResultFragment extends Fragment {
         return view;
     }
 
-    int[] resIds = {R.drawable.image_sample_post};
+    int[] resIds = {R.drawable.image_sample_post01, R.drawable.image_sample_post02
+            , R.drawable.image_sample_post03, R.drawable.image_sample_post04};
 
     String sampleString = "this is sample content ";
 
@@ -70,7 +71,7 @@ public class SearchResultFragment extends Fragment {
                 sampleStringBuilder.append(sampleString);
             }
             Post p = new Post();
-            p.setCommetCount("+3");
+            p.setReplyCount("+3");
             p.setDate("2016년 " + "10월 " + r.nextInt(30) + "일");
             p.setProfileImage(ContextCompat.getDrawable(getContext(), R.drawable.image_default_profile));
             p.setNickName("name " + i);

@@ -14,6 +14,9 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     Button signUpButton;
 
+    String id;
+    String passWord;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,9 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText)findViewById(R.id.edit_password);
         loginButton = (Button)findViewById(R.id.btn_login);
         signUpButton = (Button)findViewById(R.id.btn_sign_up);
+
+        id = inputId.getText().toString();
+        passWord = inputPassword.getText().toString();
 
     }
 

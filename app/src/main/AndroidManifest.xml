@@ -16,16 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".DetailPostActivity" />
+        <activity android:name=".DetailPostActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".UpdatePostActivity" />
-        <activity android:name=".DetailMemberActivity" />
+        <activity android:name=".DetailUserActivity" />
         <activity android:name=".NewWriteActivity" />
         <activity android:name=".SettingActivity" />
-        <activity android:name=".UpdateMyProfileActivity"></activity>
+        <activity android:name=".UpdateMyProfileActivity">
+
+        </activity>
     </application>
 
 </manifest>

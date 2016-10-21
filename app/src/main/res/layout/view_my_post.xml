@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/image_sample_post" />
+            app:srcCompat="@drawable/image_sample_post01" />
 
         <TextView
             android:id="@+id/text_post_content"
@@ -51,7 +51,7 @@
             android:background="@color/postCount"
             android:padding="8dp"
             android:text="+2"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/brightCoolGray"
             android:textSize="40sp" />
 
         <TextView
