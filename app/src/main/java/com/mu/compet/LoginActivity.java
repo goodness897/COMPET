@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String edit = s.toString();
-                if (edit.length() > 0) {
+                if (edit.length() > 0 && inputId.getText().toString().length() > 0) {
                     loginButton.setBackgroundColor(getResources().getColor(R.color.mainRedColor));
                     loginButton.setEnabled(true);
 
