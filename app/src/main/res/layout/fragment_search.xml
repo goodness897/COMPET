@@ -24,7 +24,7 @@
 
         <EditText
             android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="@dimen/login_margin_left"
+            android:drawablePadding="@dimen/drawable_padding_left"
             android:paddingLeft="@dimen/login_margin_left"
             android:background="@drawable/edit_shape_solid"
             android:id="@+id/edit_search_keyword"

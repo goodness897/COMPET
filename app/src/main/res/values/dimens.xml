@@ -4,5 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="toolbar_text">20sp</dimen>
-    <dimen name="login_margin_left">16dp</dimen>
+    <dimen name="login_margin_left">40dp</dimen>
+    <dimen name="drawable_padding_left">16dp</dimen>
+    <dimen name="edit_hint_text_padding">16dp</dimen>
 </resources>

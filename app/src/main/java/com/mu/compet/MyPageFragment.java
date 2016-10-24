@@ -61,9 +61,11 @@ public class MyPageFragment extends Fragment {
         tabHost.setup(getContext(), getChildFragmentManager(), android.R.id.tabcontent);
 
         tabHost.addTab(tabHost.newTabSpec("tab1")
-                .setIndicator(getTabIndicator(getContext(), R.drawable.my_page_tab_selector)), MyPageAllPostFragment.class, null);
+                        .setIndicator(getTabIndicator(getContext(), R.drawable.my_list_tab_selector))
+                , MyPageAllPostFragment.newInstance().getClass(), null);
         tabHost.addTab(tabHost.newTabSpec("tab2")
-                .setIndicator(getTabIndicator(getContext(), R.drawable.my_picture_tab_selector)), MyPageOnlyPictureFragment.class, null);
+                        .setIndicator(getTabIndicator(getContext(), R.drawable.my_picture_tab_selector))
+                , MyPageOnlyPictureFragment.newInstance().getClass(), null);
 
         Button updateProfileButton = (Button) view.findViewById(R.id.btn_update_my_profile);
         updateProfileButton.setOnClickListener(new View.OnClickListener() {

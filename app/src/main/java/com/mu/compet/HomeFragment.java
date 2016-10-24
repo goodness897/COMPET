@@ -91,6 +91,7 @@ public class HomeFragment extends Fragment {
         Random r = new Random();
 
         for (int i = 0; i < 10; i++) {
+            sampleStringBuilder.append(sampleString);
             for (int j = 0; j < i; j++) {
                 sampleStringBuilder.append(sampleString);
             }

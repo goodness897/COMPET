@@ -1,6 +1,7 @@
 package com.mu.compet;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -43,7 +45,7 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_my_profile);
-        initToolBar("프로필 편집");
+        initToolBar(getString(R.string.activity_update_my_profile));
 
         nickNameEditText = (EditText) findViewById(R.id.edit_my_nickname);
         changeImageText = (TextView) findViewById(R.id.text_change_image);
@@ -104,28 +106,45 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
         TextView titleText = (TextView) findViewById(R.id.toolbar_title);
         titleText.setText(title);
         toolbar.setNavigationIcon(R.drawable.ic_cancel_not_circle);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+
+                builder.setMessage(R.string.dialog_not_saved)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 그대로 종료
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_new_write_menu, menu);
+        getMenuInflater().inflate(R.menu.activity_update_my_profile, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_complete) {
+            // 수정사항 변경 완료
+
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -152,7 +171,6 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     mContentFile = mSavedFile;
                     Log.i("Image", "path : " + mContentFile.getAbsolutePath());
-
                 }
                 break;
 

@@ -38,34 +38,52 @@
         android:inputType="textEmailAddress"
         android:theme="@style/TextLabel" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="@dimen/login_margin_left"
-
-        android:layout_marginTop="32dp"
-        android:text="@string/input_password"
-        android:textColor="@color/textBlack" />
-
-    <EditText
-        android:id="@+id/edit_password"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/login_margin_left"
-        android:layout_marginRight="@dimen/login_margin_left"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:theme="@style/TextLabel" />
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/text_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="@dimen/login_margin_left"
+            android:layout_marginTop="32dp"
+            android:text="@string/edit_password"
+            android:textColor="@color/textBlack" />
+
+        <EditText
+            android:layout_below="@id/text_password"
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/login_margin_left"
+            android:layout_marginRight="@dimen/login_margin_left"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:theme="@style/TextLabel" />
+
+        <TextView
+            android:id="@+id/text_view_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/edit_password"
+            android:layout_alignBottom="@+id/edit_password"
+            android:layout_alignEnd="@+id/edit_password"
+            android:layout_alignRight="@+id/edit_password"
+            android:text="보기" />
+
+    </RelativeLayout>
 
     <Button
-
         android:id="@+id/btn_login"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/login_margin_left"
+        android:layout_marginRight="@dimen/login_margin_left"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/btn_login_selector"
+        android:enabled="false"
         android:onClick="loginButtonClicked"
         android:text="@string/btn_login"
         android:textColor="@android:color/white" />
@@ -80,11 +98,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="회원이 아니세요?" />
+        android:text="@string/text_sign_up" />
 
     <Button
         android:id="@+id/btn_sign_up"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/login_margin_left"
+        android:layout_marginRight="@dimen/login_margin_left"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"

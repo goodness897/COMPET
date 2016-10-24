@@ -41,6 +41,8 @@ public class DetailPostActivity extends AppCompatActivity {
         initToolBar(getString(R.string.activity_detail_post));
 
         listView = (ListView) findViewById(R.id.listView);
+
+
         commentEdit = (EditText)findViewById(R.id.edit_content);
         writeButton = (Button)findViewById(R.id.btn_write_comment);
 
@@ -57,7 +59,9 @@ public class DetailPostActivity extends AppCompatActivity {
                 reply.setContent(comment);
                 reply.setProfileImage(ContextCompat.getDrawable(DetailPostActivity.this, resIds[1]));
                 mAdapter.add(reply);
-                listView.setSelection(mAdapter.getCount() - 1);
+
+                listView.smoothScrollToPosition(mAdapter.getCount());
+//                listView.setSelection(mAdapter.getCount() - 1);
             }
         });
 

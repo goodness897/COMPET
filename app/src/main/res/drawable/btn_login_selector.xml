@@ -3,7 +3,7 @@
 
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/gray"
+            <solid android:color="@color/secondSubBlueColor"
                 android:width="1dp"/>
             <padding
                 android:left="2dp"
@@ -14,7 +14,7 @@
     </item>
     <item android:state_pressed="false">
         <shape>
-            <solid android:color="@color/mainRedColor"
+            <solid android:color="@color/gray"
                 android:width="1dp"/>
             <padding
                 android:left="2dp"

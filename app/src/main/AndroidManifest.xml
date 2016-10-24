@@ -25,7 +25,8 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".DetailPostActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".UpdatePostActivity" />
