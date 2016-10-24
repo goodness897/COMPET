@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
         tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
 
         tabHost.addTab(tabHost.newTabSpec("tab1")
-                .setIndicator(getTabIndicator(this, R.drawable.home_tab_selector)), HomeFragment.class, null);
+                .setIndicator(getTabIndicator(this, R.drawable.home_tab_selector)), HomeFragment.newInstance().getClass(), null);
         tabHost.addTab(tabHost.newTabSpec("tab2")
-                .setIndicator(getTabIndicator(this, R.drawable.search_tab_selector)), SearchFragment.class, null);
+                .setIndicator(getTabIndicator(this, R.drawable.search_tab_selector)), SearchFragment.newInstance().getClass(), null);
         tabHost.addTab(tabHost.newTabSpec("tab3")
-                .setIndicator(getTabIndicator(this, R.drawable.write_tab_selector)), WriteFragment.class, null);
+                .setIndicator(getTabIndicator(this, R.drawable.write_tab_selector)), WriteFragment.newInstance().getClass(), null);
         tabHost.addTab(tabHost.newTabSpec("tab4")
-                .setIndicator(getTabIndicator(this, R.drawable.my_page_tab_selector)), MyPageFragment.class, null);
+                .setIndicator(getTabIndicator(this, R.drawable.my_page_tab_selector)), MyPageFragment.newInstance().getClass(), null);
 
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             String preTab = "tab1";
