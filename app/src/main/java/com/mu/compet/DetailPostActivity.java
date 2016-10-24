@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +23,16 @@ public class DetailPostActivity extends AppCompatActivity {
 
     ListView listView;
     ReplyAdapter mAdapter;
+    EditText commentEdit;
+    Button writeButton;
+
+    ImageView profileImage;
+    TextView nickNameText;
+    TextView postDateText;
+    ImageView firstImage;
+    ImageView secondImage;
+    ImageView thirdImage;
+    TextView contentText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +41,31 @@ public class DetailPostActivity extends AppCompatActivity {
         initToolBar(getString(R.string.activity_detail_post));
 
         listView = (ListView) findViewById(R.id.listView);
+        commentEdit = (EditText)findViewById(R.id.edit_content);
+        writeButton = (Button)findViewById(R.id.btn_write_comment);
+
+        writeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Random r = new Random();
+                String comment = commentEdit.getText().toString();
+                commentEdit.setText("");
+                Reply reply = new Reply();
+                reply.setNickName("name" + r.nextInt(10));
+                reply.setDate((r.nextInt(3) + 1) + "시간 전");
+                reply.setContent(comment);
+                reply.setProfileImage(ContextCompat.getDrawable(DetailPostActivity.this, resIds[1]));
+                mAdapter.add(reply);
+                listView.setSelection(mAdapter.getCount() - 1);
+            }
+        });
+
+
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_detail_header, null, false);
+        initHeader(headerView);
+//        setHeaderView(post);
+
         listView.addHeaderView(headerView);
         mAdapter = new ReplyAdapter();
         listView.setAdapter(mAdapter);
@@ -37,6 +74,23 @@ public class DetailPostActivity extends AppCompatActivity {
 
 
     }
+
+    private void initHeader(View v) {
+        profileImage = (ImageView)v.findViewById(R.id.image_profile);
+        nickNameText = (TextView)v.findViewById(R.id.text_nickname);
+        postDateText = (TextView)v.findViewById(R.id.text_post_date);
+        firstImage = (ImageView)v.findViewById(R.id.image_post_first_image);
+        secondImage = (ImageView)v.findViewById(R.id.image_post_second_image);
+        thirdImage = (ImageView)v.findViewById(R.id.image_post_third_image);
+        contentText = (TextView)v.findViewById(R.id.text_post_content);
+
+    }
+
+//    private void setHeaderView(Post post) {
+//        nickNameText.setText(post.getNickName());
+//        postDateText.setText(post.getDate());
+//        contentText.setText(post.getPostContent());
+//    }
 
     private void initToolBar(String title) {
 

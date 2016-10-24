@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -61,10 +62,8 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 4;
                 Bitmap bmImg = BitmapFactory.decodeFile(mContentFile.getAbsolutePath(), options);
-                Bitmap resized = Bitmap.createScaledBitmap( bmImg, dstWidth, dstHeight, true );
+                Bitmap resized = Bitmap.createScaledBitmap(bmImg, dstWidth, dstHeight, true);
                 profileView.setImageBitmap(resized);
-
-                profileView.setImageBitmap(bmImg);
             }
         }
 
@@ -169,8 +168,11 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
                         options.inSampleSize = 4;
                         String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
                         Bitmap bmImg = BitmapFactory.decodeFile(path, options);
-                        Bitmap resized = Bitmap.createScaledBitmap( bmImg, dstWidth, dstHeight, true );
-                        profileView.setImageBitmap(resized);
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(90);
+                        Bitmap resized = Bitmap.createScaledBitmap(bmImg, dstWidth, dstHeight, true);
+                        Bitmap rotateBitmap = Bitmap.createBitmap(resized, 0, 0, resized.getWidth(), resized.getHeight(), matrix, true);
+                        profileView.setImageBitmap(rotateBitmap);
                         Log.i("Image", "path : " + path);
                     }
                     break;

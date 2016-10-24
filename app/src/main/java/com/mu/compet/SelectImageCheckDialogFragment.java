@@ -90,18 +90,6 @@ public class SelectImageCheckDialogFragment extends DialogFragment {
 
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mSavedFile != null) {
-            outState.putString("savedfile", mSavedFile.getAbsolutePath());
-        }
-        if (mContentFile != null) {
-            outState.putString("contentfile", mContentFile.getAbsolutePath());
-        }
-    }
-
-
-    @Override
     public void show(FragmentManager manager, String tag) {
         super.show(manager, tag);
     }

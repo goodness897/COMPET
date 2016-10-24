@@ -2,11 +2,13 @@ package com.mu.compet.data;
 
 import android.graphics.drawable.Drawable;
 
+import java.io.Serializable;
+
 /**
  * Created by Mu on 2016-10-20.
  */
 
-public class Post {
+public class Post implements Serializable{
 
     private Drawable profileImage;
     private String nickName;
@@ -71,4 +73,6 @@ public class Post {
     public void setReplyCount(String replyCount) {
         this.replyCount = replyCount;
     }
+
+
 }
