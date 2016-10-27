@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mu.compet.data.Post;
+import com.mu.compet.data.Board;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ import java.util.List;
  * Created by Mu on 2016-10-20.
  */
 public class PostAdapter extends BaseAdapter {
-    private List<Post> items = new ArrayList<>();
-    Post post;
+    private List<Board> items = new ArrayList<>();
+    Board board;
 
     private ImageView profileImageView;
     private TextView nickNameTextView;
@@ -31,12 +31,12 @@ public class PostAdapter extends BaseAdapter {
     private ImageView commentImageView;
     private TextView commentCountView;
 
-    public void add(Post post) {
-        items.add(post);
+    public void add(Board board) {
+        items.add(board);
         notifyDataSetChanged();
     }
 
-    public void addAll(List<Post> items) {
+    public void addAll(List<Board> items) {
         this.items.addAll(items);
         notifyDataSetChanged();
     }
@@ -69,14 +69,14 @@ public class PostAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.view_post, parent, false);
         }
-        post = items.get(position);
-        initView(convertView, post);
-        setBoardView(post);
+        board = items.get(position);
+        initView(convertView, board);
+        setBoardView(board);
         return convertView;
     }
 
     public interface OnUserClickListener {
-        public void onUserClick(View view, Post post);
+        public void onUserClick(View view, Board board);
     }
 
     OnUserClickListener mListener;
@@ -86,7 +86,7 @@ public class PostAdapter extends BaseAdapter {
     }
 
     public interface OnPostClickListener {
-        public void onPostClick(View view, Post post);
+        public void onPostClick(View view, Board board);
     }
 
     OnPostClickListener pListener;
@@ -95,7 +95,7 @@ public class PostAdapter extends BaseAdapter {
         pListener = listener;
     }
 
-    private void initView(View v, final Post post) {
+    private void initView(View v, final Board board) {
 
         LinearLayout linearLayout = (LinearLayout) v.findViewById(R.id.user_info_layout);
         RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.post_info_layout);
@@ -112,7 +112,7 @@ public class PostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onUserClick(v, post);
+                    mListener.onUserClick(v, board);
                 }
 
             }
@@ -122,20 +122,20 @@ public class PostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if(pListener != null) {
-                    pListener.onPostClick(v, post);
+                    pListener.onPostClick(v, board);
                 }
             }
         });
 
     }
 
-    private void setBoardView(Post post) {
-        profileImageView.setImageDrawable(post.getProfileImage());
-        nickNameTextView.setText(post.getNickName());
-        dateView.setText(post.getDate());
-        postImageView.setImageDrawable(post.getPostImage());
-        imageCountView.setText(post.getImageCount());
-        postContentView.setText(post.getPostContent());
-        commentCountView.setText(post.getReplyCount());
+    private void setBoardView(Board board) {
+        profileImageView.setImageDrawable(board.getProfileImage());
+        nickNameTextView.setText(board.getNickName());
+        dateView.setText(board.getDate());
+        postImageView.setImageDrawable(board.getPostImage());
+        imageCountView.setText(board.getImageCount());
+        postContentView.setText(board.getPostContent());
+        commentCountView.setText(board.getReplyCount());
     }
 }

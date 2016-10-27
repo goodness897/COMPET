@@ -12,7 +12,7 @@
     <string name="btn_complete_sign_up">SignUp</string>
     <string name="activity_new_write">New Post</string>
     <string name="edit_search_keyword">Please enter your keyword</string>
-    <string name="btn_complete_post">Share my post</string>
+    <string name="btn_complete_post">Share my board</string>
     <string name="update_my_profile">Update Profile</string>
     <string name="activity_setting">Setting</string>
     <string name="text_change_image">Change your photo</string>

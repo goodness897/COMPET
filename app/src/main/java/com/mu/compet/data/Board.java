@@ -8,7 +8,20 @@ import java.io.Serializable;
  * Created by Mu on 2016-10-20.
  */
 
-public class Post implements Serializable{
+public class Board implements Serializable{
+
+    private int userNum;
+    private String userId;
+    private String userNick;
+    private int boardNum;
+    private String boardContent;
+    private String boardRegDate;
+    private String boardUdtDate;
+    private int boardImgCnt;
+    private int boardAudCnt;
+    private int BoardVidCnt;
+    private int boardReplyCnt;
+    private int boardFirstImg;
 
     private Drawable profileImage;
     private String nickName;

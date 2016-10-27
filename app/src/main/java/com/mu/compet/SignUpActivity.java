@@ -153,8 +153,6 @@ public class SignUpActivity extends AppCompatActivity {
                     completeButton.setBackgroundColor(getResources().getColor(R.color.gray));
                     completeButton.setEnabled(false);
                 }
-
-
             }
         };
         return textWatcher;

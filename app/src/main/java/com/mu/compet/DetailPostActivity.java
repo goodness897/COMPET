@@ -68,7 +68,7 @@ public class DetailPostActivity extends AppCompatActivity {
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_detail_header, null, false);
         initHeader(headerView);
-//        setHeaderView(post);
+//        setHeaderView(board);
 
         listView.addHeaderView(headerView);
         mAdapter = new ReplyAdapter();
@@ -90,10 +90,10 @@ public class DetailPostActivity extends AppCompatActivity {
 
     }
 
-//    private void setHeaderView(Post post) {
-//        nickNameText.setText(post.getNickName());
-//        postDateText.setText(post.getDate());
-//        contentText.setText(post.getPostContent());
+//    private void setHeaderView(Board board) {
+//        nickNameText.setText(board.getNickName());
+//        postDateText.setText(board.getDate());
+//        contentText.setText(board.getPostContent());
 //    }
 
     private void initToolBar(String title) {

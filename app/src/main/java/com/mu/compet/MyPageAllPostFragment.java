@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.mu.compet.data.Post;
+import com.mu.compet.data.Board;
 
 import java.util.Random;
 
@@ -54,7 +54,7 @@ public class MyPageAllPostFragment extends Fragment {
         mAdapter = new MyPostAdapter();
         mAdapter.setOnPostClickListener(new PostAdapter.OnPostClickListener() {
             @Override
-            public void onPostClick(View view, Post post) {
+            public void onPostClick(View view, Board board) {
                 Intent intent = new Intent(getContext(), DetailPostActivity.class);
                 startActivity(intent);
             }
@@ -79,7 +79,7 @@ public class MyPageAllPostFragment extends Fragment {
             for (int j = 0; j < i; j++) {
                 sampleStringBuilder.append(sampleString);
             }
-            Post p = new Post();
+            Board p = new Board();
             p.setReplyCount("+" + r.nextInt(10));
             p.setPostContent(sampleStringBuilder.toString() + i);
             p.setImageCount("+" + r.nextInt(3));

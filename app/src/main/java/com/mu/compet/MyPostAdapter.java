@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mu.compet.data.Post;
+import com.mu.compet.data.Board;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Mu on 2016-10-20.
  */
 public class MyPostAdapter extends BaseAdapter {
-    private List<Post> items = new ArrayList<>();
+    private List<Board> items = new ArrayList<>();
 
     private ImageView postImageView;
     private TextView imageCountView;
@@ -26,15 +26,15 @@ public class MyPostAdapter extends BaseAdapter {
     private ImageView commentImageView;
     private TextView commentCountView;
     private RelativeLayout layout;
-    Post post;
+    Board board;
 
 
-    public void add(Post post) {
-        items.add(post);
+    public void add(Board board) {
+        items.add(board);
         notifyDataSetChanged();
     }
 
-    public void addAll(List<Post> items) {
+    public void addAll(List<Board> items) {
         this.items.addAll(items);
         notifyDataSetChanged();
     }
@@ -61,7 +61,7 @@ public class MyPostAdapter extends BaseAdapter {
     }
 
     public interface OnPostClickListener {
-        public void onPostClick(View view, Post post);
+        public void onPostClick(View view, Board board);
     }
 
     PostAdapter.OnPostClickListener pListener;
@@ -78,13 +78,13 @@ public class MyPostAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.view_my_post, parent, false);
         }
 
-        post = items.get(position);
-        initView(convertView, post);
-        setBoardView(post);
+        board = items.get(position);
+        initView(convertView, board);
+        setBoardView(board);
         return convertView;
     }
 
-    private void initView(View v, final Post post) {
+    private void initView(View v, final Board board) {
 
         layout = (RelativeLayout) v.findViewById(R.id.layout);
         postImageView = (ImageView) v.findViewById(R.id.image_post_first_image);
@@ -97,18 +97,18 @@ public class MyPostAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if(pListener != null) {
-                    pListener.onPostClick(v, post);
+                    pListener.onPostClick(v, board);
                 }
             }
         });
 
     }
 
-    private void setBoardView(Post post) {
+    private void setBoardView(Board board) {
 
-        postImageView.setImageDrawable(post.getPostImage());
-        imageCountView.setText(post.getImageCount());
-        postContentView.setText(post.getPostContent());
-        commentCountView.setText(post.getReplyCount());
+        postImageView.setImageDrawable(board.getPostImage());
+        imageCountView.setText(board.getImageCount());
+        postContentView.setText(board.getPostContent());
+        commentCountView.setText(board.getReplyCount());
     }
 }

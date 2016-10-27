@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mu.compet.data.Post;
+import com.mu.compet.data.Board;
 
 import java.util.Random;
 
@@ -52,8 +52,8 @@ public class HomeFragment extends Fragment {
         mAdapter = new PostAdapter();
         mAdapter.setOnUserClickListener(new PostAdapter.OnUserClickListener() {
             @Override
-            public void onUserClick(View view, Post post) {
-                String nickName = post.getNickName();
+            public void onUserClick(View view, Board board) {
+                String nickName = board.getNickName();
                 Intent intent = new Intent(getContext(), DetailUserActivity.class);
                 intent.putExtra("NickName", nickName);
                 startActivity(intent);
@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         });
         mAdapter.setOnPostClickListener(new PostAdapter.OnPostClickListener() {
             @Override
-            public void onPostClick(View view, Post post) {
+            public void onPostClick(View view, Board board) {
                 Intent intent = new Intent(getContext(), DetailPostActivity.class);
                 startActivity(intent);
             }
@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment {
             for (int j = 0; j < i; j++) {
                 sampleStringBuilder.append(sampleString);
             }
-            Post p = new Post();
+            Board p = new Board();
             p.setReplyCount("+" + r.nextInt(10));
             p.setDate("2016년 " + "10월 " + r.nextInt(30) + "일");
             p.setProfileImage(ContextCompat.getDrawable(getContext(), R.drawable.image_default_profile));
