@@ -8,6 +8,15 @@ import android.graphics.drawable.Drawable;
 
 public class Reply {
 
+    private int userNum;
+    private String userNick;
+    private String userId;
+    private int replyNum;
+    private String replycontent;
+    private String replyRegDate;
+    private String replyUdtDate;
+
+
     private Drawable profileImage;
     private String nickName;
     private String date;

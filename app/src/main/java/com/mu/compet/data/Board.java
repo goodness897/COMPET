@@ -23,6 +23,7 @@ public class Board implements Serializable{
     private int boardReplyCnt;
     private int boardFirstImg;
 
+
     private Drawable profileImage;
     private String nickName;
     private String date;
