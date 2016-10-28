@@ -110,6 +110,19 @@ public class SearchFragment extends Fragment {
 
     private void performSearch() {
 
+//        SearchBoardRequest request = new SearchBoardRequest(getContext(), "이름", "1");
+//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<Board>() {
+//            @Override
+//            public void onSuccess(NetworkRequest<Board> request, Board result) {
+//
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<Board> request, int errorCode, String errorMessage, Throwable e) {
+//
+//            }
+//        });
+
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment fragment = new SearchResultFragment();
@@ -129,6 +142,4 @@ public class SearchFragment extends Fragment {
             keywordInputEditText.setText(text);
         }
     }
-
-
 }

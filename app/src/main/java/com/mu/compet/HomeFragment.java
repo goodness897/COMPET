@@ -90,6 +90,17 @@ public class HomeFragment extends Fragment {
 
 
 //        ListBoardRequest request = new ListBoardRequest(getContext(), "", "");
+//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<Board[]>() {
+//            @Override
+//            public void onSuccess(NetworkRequest<Board[]> request, Board[] result) {
+//
+//            }
+//
+//            @Override
+//            public void onFail(NetworkRequest<Board[]> request, int errorCode, String errorMessage, Throwable e) {
+//
+//            }
+//        });
 
         StringBuilder sampleStringBuilder = new StringBuilder();
         Random r = new Random();

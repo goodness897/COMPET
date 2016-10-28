@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.LeaveUserRequest;
+import com.mu.compet.request.LogoutRequest;
+
 public class SettingActivity extends AppCompatActivity {
 
     AlertDialog.Builder builder;
@@ -21,7 +27,7 @@ public class SettingActivity extends AppCompatActivity {
         initToolBar(getString(R.string.activity_setting));
 
         builder = new AlertDialog.Builder(this);
-        Button btn = (Button)findViewById(R.id.btn_change_password);
+        Button btn = (Button) findViewById(R.id.btn_change_password);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,7 +37,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        btn = (Button)findViewById(R.id.btn_logout);
+        btn = (Button) findViewById(R.id.btn_logout);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +47,7 @@ public class SettingActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // 로그아웃 요청
+                                performLogout();
                                 dialog.cancel();
                             }
                         })
@@ -57,7 +63,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        btn = (Button)findViewById(R.id.btn_leave);
+        btn = (Button) findViewById(R.id.btn_leave);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +72,8 @@ public class SettingActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // 로그아웃 요청
+
+                                performLeave();
                                 dialog.cancel();
                             }
                         })
@@ -79,6 +86,37 @@ public class SettingActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
+            }
+        });
+    }
+
+    private void performLeave() {
+        LeaveUserRequest request = new LeaveUserRequest(this);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+            @Override
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                // 성공
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                // 실패
+            }
+        });
+    }
+
+    private void performLogout() {
+
+        LogoutRequest request = new LogoutRequest(this);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+            @Override
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                // 성공
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                // 실패
             }
         });
     }

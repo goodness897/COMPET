@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -21,6 +22,10 @@ public class ChangePasswordDialogFragment extends DialogFragment {
 
     TextView cancelText;
     TextView completeText;
+
+    EditText oldPasswordView;
+    EditText newPasswordView;
+    EditText newCheckPasswordView;
 
 
     public ChangePasswordDialogFragment() {
@@ -49,6 +54,9 @@ public class ChangePasswordDialogFragment extends DialogFragment {
 
         cancelText = (TextView)view.findViewById(R.id.text_cancel);
         completeText = (TextView)view.findViewById(R.id.text_complete);
+        oldPasswordView = (EditText)view.findViewById(R.id.edit_old_password);
+        newPasswordView = (EditText)view.findViewById(R.id.edit_new_password);
+        newCheckPasswordView = (EditText)view.findViewById(R.id.edit_new_password_check);
 
 
         cancelText.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +80,5 @@ public class ChangePasswordDialogFragment extends DialogFragment {
     public void show(FragmentManager manager, String tag) {
         super.show(manager, tag);
     }
-
 
 }
