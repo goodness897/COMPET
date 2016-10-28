@@ -12,7 +12,7 @@ import okhttp3.ResponseBody;
 /**
  * Created by Tacademy on 2016-08-23.
  */
-public abstract class NetworkRequest<T>implements Callback {
+public abstract class NetworkRequest<T> implements Callback {
 
     T result;
     int code;
@@ -25,8 +25,11 @@ public abstract class NetworkRequest<T>implements Callback {
     }
 
     public abstract Request getRequest();
+
     protected abstract T parse(ResponseBody body) throws IOException;
+
     Call call;
+
     void process(OkHttpClient client) {
         Request request = getRequest();
         call = client.newCall(request);

@@ -1,9 +1,12 @@
 package com.mu.compet;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,12 +17,15 @@ import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.DetailUserRequest;
 
+import static com.mu.compet.MyApplication.getContext;
+
 public class DetailUserActivity extends AppCompatActivity {
 
     TextView nickNameView;
     TextView postCountView;
     ImageView profileImageView;
     private String userId;
+    FragmentTabHost tabHost;
 
 
     @Override
@@ -30,11 +36,28 @@ public class DetailUserActivity extends AppCompatActivity {
         nickNameView = (TextView) findViewById(R.id.text_nickname);
         postCountView = (TextView) findViewById(R.id.text_post_count);
         profileImageView = (ImageView) findViewById(R.id.image_profile);
+        tabHost = (FragmentTabHost) findViewById(R.id.tabHost);
+
+        tabHost.setup(getContext(), getSupportFragmentManager(), android.R.id.tabcontent);
+
+        tabHost.addTab(tabHost.newTabSpec("tab1")
+                        .setIndicator(getTabIndicator(getContext(), R.drawable.my_list_tab_selector))
+                , UserAllPostFragment.newInstance().getClass(), null);
+        tabHost.addTab(tabHost.newTabSpec("tab2")
+                        .setIndicator(getTabIndicator(getContext(), R.drawable.my_picture_tab_selector))
+                , UserOnlyPictureFragment.newInstance().getClass(), null);
 
         initData();
 
         initToolBar(userId);
 
+    }
+
+    private View getTabIndicator(Context context, int res) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+        imageView.setBackgroundResource(res);
+        return view;
     }
 
     private void initData() {

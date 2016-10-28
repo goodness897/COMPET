@@ -45,10 +45,10 @@ public abstract class AbstractRequest<T> extends NetworkRequest<T> {
         String text = body.string();
         Gson gson = new Gson();
         NetworkResultTemp temp = gson.fromJson(text, NetworkResultTemp.class);
-        if (temp.getCode() == 1) {
+        if (temp.getCode() == 0) { // 성공
             T result = gson.fromJson(text, getType());
             return result;
-        } else if (temp.getCode() == 0) {
+        } else if (temp.getCode() == 1) { // 실패
             Type type = new TypeToken<ResultMessage>(){}.getType();
             ResultMessage result = gson.fromJson(text, type);
             throw new IOException(result.getMessage());

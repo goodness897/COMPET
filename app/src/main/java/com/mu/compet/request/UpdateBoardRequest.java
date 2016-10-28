@@ -35,6 +35,7 @@ public class UpdateBoardRequest extends AbstractRequest<ResultMessage> {
                 .build();
 
         MultipartBody.Builder body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
                 .addFormDataPart(BOARD_CONTENT, boardContent);
         if (files != null) {
             for(int i = 0; i < files.length; i++)
@@ -52,7 +53,7 @@ public class UpdateBoardRequest extends AbstractRequest<ResultMessage> {
         } else {
             body.addFormDataPart(DELFILES, "");
         }
-        RequestBody requestBody = body.build();
+        MultipartBody requestBody = body.build();
 
         mRequest = new Request.Builder()
                 .url(url)

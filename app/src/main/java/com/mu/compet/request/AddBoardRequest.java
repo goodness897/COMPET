@@ -56,7 +56,7 @@ public class AddBoardRequest extends AbstractRequest<ResultMessage> {
             body.addFormDataPart(USER_FILE, "");
         }
 
-        RequestBody requestBody = body.build();
+        MultipartBody requestBody = body.build();
 
         mRequest = new Request.Builder()
                 .url(url)
