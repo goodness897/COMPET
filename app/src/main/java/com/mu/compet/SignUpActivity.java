@@ -14,11 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.SignUpRequest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,6 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
         editPasswordCheck.addTextChangedListener(setTextWatcher());
 
         completeButton = (Button) findViewById(R.id.btn_complete);
+
 
         imageCamera.bringToFront();
 
@@ -174,12 +181,37 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    // SignUp 완료 버튼
     public void loginCompleteSignUp(View view) {
 
-        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+        String userId = editId.getText().toString();
+        String userPass = editPassword.getText().toString();
+        String userNick = editNickName.getText().toString();
+        File userFile = new File(mCurrentPhotoPath);
+
+        SignUpRequest request = new SignUpRequest(this, userId, userPass, userNick, userFile);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+            @Override
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+
+                Log.d("result", "성공 : " + result.getCode());
+                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("result", "실패 : " + errorCode);
+
+
+
+            }
+        });
+
+
     }
 
     public void duplicateIdCheckClicked(View view) {
@@ -210,7 +242,7 @@ public class SignUpActivity extends AppCompatActivity {
                             if (f.exists()) {
                                 f.delete();
                             }
-                            mCurrentPhotoPath = null;
+//                            mCurrentPhotoPath = null;
                         }
                     }
                     break;

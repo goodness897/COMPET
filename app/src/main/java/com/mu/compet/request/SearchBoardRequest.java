@@ -29,7 +29,7 @@ public class SearchBoardRequest extends AbstractRequest<Board> {
     private final static String KEYWORD = "keyWord";
 
     public SearchBoardRequest(Context context, String searchType, String keyWord) {
-        HttpUrl url = getBaseUrlHttpsBuilder()
+        HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(BOARDS)
                 .addQueryParameter(SEARCH_TYPE, searchType)
                 .addQueryParameter(KEYWORD, keyWord)

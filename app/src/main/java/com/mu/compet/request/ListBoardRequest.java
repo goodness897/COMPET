@@ -16,26 +16,27 @@ import okhttp3.Request;
  */
 //
 
-//        게시물 상세 조회(GET)
-//        boardNum(int) 보고싶은 게시글의 고유 번호
+//        게시물 검색(GET)
+//        pagNum(int) 총가져올 게시글의 개수 lastBoardNum 마지막으로 받은 게시글의 고유번호
 //
-//        예시) /board/1
-public class DetailBoardRequest extends AbstractRequest<Board> {
+//        예시) /boards/{pageNum},{lastBoardNum}
+
+public class ListBoardRequest extends AbstractRequest<Board[]> {
 
     Request mRequest;
-    final static String BOARD = "board";
+    private final static String BOARDS = "boards";
 
-    public DetailBoardRequest(Context context, String boardNum) {
+    public ListBoardRequest(Context context, String pageNum, String lastBoardNum) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment(BOARD)
-                .addPathSegment(boardNum)
+                .addPathSegment(BOARDS)
+                .addPathSegment(pageNum+","+lastBoardNum)
                 .build();
-
 
         mRequest = new Request.Builder()
                 .url(url)
                 .tag(context)
                 .build();
+
         Log.i("url", mRequest.url().toString());
     }
 
@@ -46,7 +47,7 @@ public class DetailBoardRequest extends AbstractRequest<Board> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<Board>() {
+        return new TypeToken<Board[]>() {
         }.getType();
     }
 }

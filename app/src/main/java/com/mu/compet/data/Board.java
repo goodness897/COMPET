@@ -32,6 +32,7 @@ public class Board implements Serializable{
     private String postContent;
     private String replyCount;
 
+
     public Drawable getProfileImage() {
         return profileImage;
     }

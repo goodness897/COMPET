@@ -32,18 +32,19 @@ public class AddBoardRequest extends AbstractRequest<ResultMessage> {
     MediaType jpeg = MediaType.parse("image/jpeg");
 
 
-    final static String BOARD = "board";
-    final static String BOARD_CONTENT = "boardContent";
-    final static String USER_PASSWORD = "userPass";
-    final static String USER_NICKNAME = "userNick";
-    final static String USER_FILE = "userFile";
+    private final static String BOARD = "board";
+    private final static String BOARD_CONTENT = "boardContent";
+    private final static String USER_PASSWORD = "userPass";
+    private final static String USER_NICKNAME = "userNick";
+    private final static String USER_FILE = "userFile";
 
     public AddBoardRequest(Context context, String boardContent,  File[] files) {
-        HttpUrl url = getBaseUrlHttpsBuilder()
+        HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(BOARD)
                 .build();
 
         MultipartBody.Builder body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
                 .addFormDataPart(BOARD_CONTENT, boardContent);
 
         if (files != null) {

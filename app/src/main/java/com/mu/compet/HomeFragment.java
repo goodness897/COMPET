@@ -87,6 +87,10 @@ public class HomeFragment extends Fragment {
     String sampleString = "this is sample content ";
 
     private void initData() {
+
+
+//        ListBoardRequest request = new ListBoardRequest(getContext(), "", "");
+
         StringBuilder sampleStringBuilder = new StringBuilder();
         Random r = new Random();
 

@@ -1,16 +1,20 @@
 package com.mu.compet.request;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mu.compet.data.ResultMessage;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 /**
  * Created by Mu on 2016-10-27.
@@ -53,6 +57,14 @@ public class LoginRequest extends AbstractRequest<ResultMessage> {
 
     }
 
+    @Override
+    protected ResultMessage parse(ResponseBody body) throws IOException {
+        String text = body.string();
+        Log.i("result", text);
+        Gson gson = new Gson();
+        ResultMessage temp = gson.fromJson(text, getType());
+        return temp;
+    }
 
     @Override
     protected Type getType() {

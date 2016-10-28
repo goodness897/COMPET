@@ -17,7 +17,10 @@ import okhttp3.ResponseBody;
  */
 public abstract class AbstractRequest<T> extends NetworkRequest<T> {
 
-    private final static String HOST = "192.168.6.11";
+    private final static String HOST = "192.168.6.11"; // 정호 ip
+//    private final static String HOST = "192.168.6.62"; // 용범 ip
+//    private final static String HOST = "192.168.6.121"; // 영훈 ip
+
     private final static int HTTPS_PORT = 443;
     private final static int HTTP_PORT = 8080;
 

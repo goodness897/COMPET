@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         inputId = (EditText) findViewById(R.id.edit_id);
         inputPassword = (EditText) findViewById(R.id.edit_password);
         loginButton = (Button) findViewById(R.id.btn_login);
@@ -41,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
                 showPassword();
             }
         });
-
 
         id = inputId.getText().toString();
         passWord = inputPassword.getText().toString();
@@ -94,9 +94,27 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginButtonClicked(View view) {
+
+        /*String userId = inputId.getText().toString();
+        String userPass = inputPassword.getText().toString();
+
+        LoginRequest request = new LoginRequest(this, userId, userPass);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+            @Override
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });*/
+
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+
     }
 
     public void signUpButtonClicked(View view) {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.User;
+import com.mu.compet.data.ResultMessage;
 
 import java.lang.reflect.Type;
 
@@ -15,36 +15,37 @@ import okhttp3.Request;
  * Created by Mu on 2016-10-27.
  */
 
-// userNum(int) 조회할 유저 번호
-// /user/{userNum}
+public class DeleteReplyRequest extends AbstractRequest<ResultMessage>{
 
-public class UserDetailRequest extends AbstractRequest<User> {
     Request mRequest;
 
-    private final static String USER = "user";
-    private final static String USER_NUMBER = "userNum";
-    private final static String USER_ID = "userId";
-    private final static String USER_NICKNAME = "userNick";
+    private final static String BOARD = "board";
+    private final static String REPLY = "reply";
 
-    public UserDetailRequest(Context context, String userNum) {
+    public DeleteReplyRequest(Context context, String boardNum, String replyNum) {
+
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment(USER)
-                .addPathSegment(userNum)
+                .addPathSegment(BOARD)
+                .addPathSegment(boardNum)
+                .addPathSegment(REPLY)
+                .addPathSegment(replyNum)
                 .build();
+
         mRequest = new Request.Builder()
                 .url(url)
+                .delete()
                 .tag(context)
                 .build();
-        Log.i("url", mRequest.url().toString());
-    }
 
+        Log.i("url", mRequest.url().toString());
+
+    }
 
     @Override
     protected Type getType() {
-        return new TypeToken<User>() {
-        }.getType();
-    }
+        return new TypeToken<ResultMessage>(){}.getType();
 
+    }
     @Override
     public Request getRequest() {
         return mRequest;

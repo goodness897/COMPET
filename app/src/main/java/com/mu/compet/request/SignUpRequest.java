@@ -30,9 +30,10 @@ import okhttp3.ResponseBody;
 //
 //        예시) /user
 public class SignUpRequest extends AbstractRequest<ResultMessage> {
-    Request mRequest;
-    MediaType jpeg = MediaType.parse("image/jpeg");
 
+    Request mRequest;
+
+    MediaType jpeg = MediaType.parse("image/jpeg");
 
     final static String USER = "user";
     final static String USER_ID = "userId";
@@ -41,18 +42,20 @@ public class SignUpRequest extends AbstractRequest<ResultMessage> {
     final static String USER_FILE = "userFile";
 
     public SignUpRequest(Context context, String userId, String userPass, String userNick, File userFile) {
-        HttpUrl url = getBaseUrlHttpsBuilder()
+
+        HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(USER)
                 .build();
 
         MultipartBody.Builder body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
                 .addFormDataPart(USER_ID, userId)
                 .addFormDataPart(USER_PASSWORD, userPass)
                 .addFormDataPart(USER_NICKNAME, userNick);
+
         if (userFile != null) {
             body.addFormDataPart(USER_FILE, userFile.getName(),
                     RequestBody.create(jpeg, userFile));
-
         } else {
             body.addFormDataPart(USER_FILE, "");
         }
@@ -63,13 +66,10 @@ public class SignUpRequest extends AbstractRequest<ResultMessage> {
                 .post(requestBody)
                 .tag(context)
                 .build();
+
         Log.i("url", mRequest.url().toString());
     }
 
-    @Override
-    public Request getRequest() {
-        return mRequest;
-    }
 
     @Override
     protected ResultMessage parse(ResponseBody body) throws IOException {
@@ -78,6 +78,11 @@ public class SignUpRequest extends AbstractRequest<ResultMessage> {
         ResultMessage temp = gson.fromJson(text, getType());
         Log.i("result", text);
         return temp;
+    }
+
+    @Override
+    public Request getRequest() {
+        return mRequest;
     }
 
     @Override

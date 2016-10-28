@@ -1,10 +1,9 @@
 package com.mu.compet.request;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.ResultMessage;
+import com.mu.compet.data.Reply;
 
 import java.lang.reflect.Type;
 
@@ -12,36 +11,35 @@ import okhttp3.HttpUrl;
 import okhttp3.Request;
 
 /**
- * Created by Mu on 2016-10-27.
+ * Created by Mu on 2016-10-28.
  */
 
-public class DeleteBoardRequest extends AbstractRequest<ResultMessage> {
+public class ListReplyRequest extends AbstractRequest<Reply> {
 
     Request mRequest;
 
-    private final static String BOARD = "board";
+    private static final String BOARD = "board";
+    private static final String REPLYS = "replys";
 
-    public DeleteBoardRequest(Context context, String boardNum) {
+
+    public ListReplyRequest(Context context, String boardNum, String pageNum, String lastReplyNum) {
 
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(BOARD)
                 .addPathSegment(boardNum)
+                .addPathSegment(REPLYS)
+                .addPathSegment(pageNum)
+                .addPathSegment(lastReplyNum)
                 .build();
 
         mRequest = new Request.Builder()
                 .url(url)
-                .delete()
                 .tag(context)
                 .build();
-        Log.i("url", mRequest.url().toString());
-
     }
-
     @Override
     protected Type getType() {
-        return new TypeToken<ResultMessage>() {
-        }.getType();
-
+        return new TypeToken<Reply>(){}.getType();
     }
 
     @Override

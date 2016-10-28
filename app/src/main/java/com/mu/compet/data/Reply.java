@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by Mu on 2016-10-20.
  */
 
-public class Reply {
+public class Reply implements java.io.Serializable {
 
     private int userNum;
     private String userNick;
