@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
         mAdapter.setOnPostClickListener(new PostAdapter.OnPostClickListener() {
             @Override
             public void onPostClick(View view, Board board) {
-                Intent intent = new Intent(getContext(), DetailPostActivity.class);
+                Intent intent = new Intent(getContext(), DetailBoardActivity.class);
                 intent.putExtra("board", board);
                 startActivity(intent);
             }

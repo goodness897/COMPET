@@ -108,8 +108,8 @@ public class MyPostAdapter extends BaseAdapter {
     private void setBoardView(Board board) {
 
         boardImageView.setImageURI(Uri.parse(board.getBoardFirstImg()));
-        imageCountView.setText(board.getImgCnt());
+        imageCountView.setText(board.getBoardImgCnt());
         boardContentView.setText(board.getBoardContent());
-        commentCountView.setText(board.getReplyCnt());
+        commentCountView.setText(board.getBoardReplyCnt());
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.User;
+import com.mu.compet.data.ResultMessage;
 
 import java.io.File;
 import java.lang.reflect.Type;
@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 /**
  * Created by jeon on 2016-09-04.
  */
-public class UpdateUserRequest extends AbstractRequest<User> {
+public class UpdateProfileRequest extends AbstractRequest<ResultMessage> {
     Request mRequest;
 
     MediaType jpeg = MediaType.parse("image/jpeg");
@@ -26,7 +26,7 @@ public class UpdateUserRequest extends AbstractRequest<User> {
     private final static String USER_NICKNAME = "userNick";
     private final static String USER_FILE = "userFile";
 
-    public UpdateUserRequest(Context context, String userNick, File userFile) {
+    public UpdateProfileRequest(Context context, String userNick, File userFile) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PROFILE)
                 .build();
@@ -55,7 +55,7 @@ public class UpdateUserRequest extends AbstractRequest<User> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<User>() {
+        return new TypeToken<ResultMessage>() {
         }.getType();
     }
 

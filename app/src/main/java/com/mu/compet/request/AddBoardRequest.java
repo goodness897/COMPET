@@ -63,6 +63,7 @@ public class AddBoardRequest extends AbstractRequest<ResultMessage> {
                 .post(requestBody)
                 .tag(context)
                 .build();
+
         Log.i("url", mRequest.url().toString());
     }
 

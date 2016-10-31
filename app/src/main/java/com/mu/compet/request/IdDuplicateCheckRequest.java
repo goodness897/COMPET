@@ -37,6 +37,7 @@ public class IdDuplicateCheckRequest extends AbstractRequest<ResultMessage> {
                 .url(url)
                 .tag(context)
                 .build();
+
         Log.i("url", mRequest.url().toString());
 
     }

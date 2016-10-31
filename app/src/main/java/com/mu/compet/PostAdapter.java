@@ -38,6 +38,7 @@ public class PostAdapter extends BaseAdapter {
     }
 
     public void addAll(List<Board> items) {
+        if(!this.items.isEmpty()) this.items.clear();
         this.items.addAll(items);
         notifyDataSetChanged();
     }
@@ -138,7 +139,7 @@ public class PostAdapter extends BaseAdapter {
         if(board.getBoardFirstImg() != null) {
             postImageView.setImageURI(Uri.parse(board.getBoardFirstImg()));
         }
-        imageCountView.setText(board.getImgCnt());
-        replyCountView.setText(board.getReplyCnt());
+        imageCountView.setText(board.getBoardImgCnt());
+        replyCountView.setText(board.getBoardReplyCnt());
     }
 }

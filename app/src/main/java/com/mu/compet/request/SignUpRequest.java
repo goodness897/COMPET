@@ -32,11 +32,11 @@ public class SignUpRequest extends AbstractRequest<ResultMessage> {
 
     MediaType jpeg = MediaType.parse("image/jpeg");
 
-    final static String USER = "user";
-    final static String USER_ID = "userId";
-    final static String USER_PASSWORD = "userPass";
-    final static String USER_NICKNAME = "userNick";
-    final static String USER_FILE = "userFile";
+    private final static String USER = "user";
+    private final static String USER_ID = "userId";
+    private final static String USER_PASSWORD = "userPass";
+    private final static String USER_NICKNAME = "userNick";
+    private final static String USER_FILE = "userFile";
 
     public SignUpRequest(Context context, String userId, String userPass, String userNick, File userFile) {
 

@@ -62,7 +62,7 @@ public class ReplyAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.view_comment, parent, false);
+            convertView = inflater.inflate(R.layout.view_reply, parent, false);
         }
         reply = items.get(position);
         initView(convertView, reply);

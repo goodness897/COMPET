@@ -1,11 +1,11 @@
 package com.mu.compet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mu.compet.data.User;
+import com.mu.compet.data.UserItemData;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.DetailUserRequest;
@@ -26,12 +27,15 @@ public class DetailUserActivity extends AppCompatActivity {
     ImageView profileImageView;
     private String userId;
     FragmentTabHost tabHost;
-
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_user);
+
+        Intent intent = getIntent();
+        user = (User)intent.getSerializableExtra("board");
 
         nickNameView = (TextView) findViewById(R.id.text_nickname);
         postCountView = (TextView) findViewById(R.id.text_post_count);
@@ -47,9 +51,7 @@ public class DetailUserActivity extends AppCompatActivity {
                         .setIndicator(getTabIndicator(getContext(), R.drawable.my_picture_tab_selector))
                 , UserOnlyPictureFragment.newInstance().getClass(), null);
 
-        initData();
-
-        initToolBar(userId);
+        initData(String.valueOf(user.getUserNum()));
 
     }
 
@@ -60,9 +62,33 @@ public class DetailUserActivity extends AppCompatActivity {
         return view;
     }
 
-    private void initData() {
-        DetailUserRequest request = new DetailUserRequest(this, "1");
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<User>() {
+    private void initData(String userNum) {
+        DetailUserRequest request = new DetailUserRequest(this, userNum);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<UserItemData>() {
+            @Override
+            public void onSuccess(NetworkRequest<UserItemData> request, UserItemData result) {
+                User user = result.getData();
+                setUserData(user);
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<UserItemData> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
+    }
+
+    private void setUserData(User user) {
+        nickNameView.setText(user.getUserNick());
+        initToolBar(userId);
+        if(user.getUserFile() != null) {
+            Glide.with(profileImageView.getContext()).load("http://" + user.getUserFile()).into(profileImageView);
+
+        }
+    }
+
+    /*new NetworkManager.OnResultListener<User>() {
             @Override
             public void onSuccess(NetworkRequest<User> request, User result) {
 
@@ -82,8 +108,7 @@ public class DetailUserActivity extends AppCompatActivity {
 
             }
 
-            });
-    }
+            });*/
 
     private void initToolBar(String title) {
 

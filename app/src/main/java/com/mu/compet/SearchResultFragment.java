@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import com.mu.compet.data.Board;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,15 +22,18 @@ import com.mu.compet.data.Board;
 public class SearchResultFragment extends Fragment {
     ListView listView;
     PostAdapter mAdapter;
+    ArrayList<Board> items;
+
 
     public SearchResultFragment() {
         // Required empty public constructor
     }
 
-    public static SearchResultFragment newInstance() {
+    public static SearchResultFragment newInstance(ArrayList<Board> items) {
+
         SearchResultFragment fragment = new SearchResultFragment();
         Bundle args = new Bundle();
-
+        args.putSerializable("board", items);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,6 +42,9 @@ public class SearchResultFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            items = new ArrayList<>();
+            items = (ArrayList<Board>) getArguments().getSerializable("board");
+
         }
     }
 
@@ -60,7 +68,7 @@ public class SearchResultFragment extends Fragment {
         mAdapter.setOnPostClickListener(new PostAdapter.OnPostClickListener() {
             @Override
             public void onPostClick(View view, Board board) {
-                Intent intent = new Intent(getContext(), DetailPostActivity.class);
+                Intent intent = new Intent(getContext(), DetailBoardActivity.class);
                 intent.putExtra("board", board);
                 startActivity(intent);
             }
@@ -73,6 +81,8 @@ public class SearchResultFragment extends Fragment {
 
 
     private void initData() {
+
+        mAdapter.addAll(items);
 
     }
 

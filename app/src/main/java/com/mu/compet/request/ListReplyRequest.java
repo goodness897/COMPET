@@ -3,6 +3,7 @@ package com.mu.compet.request;
 import android.content.Context;
 
 import com.google.gson.reflect.TypeToken;
+import com.mu.compet.data.ListData;
 import com.mu.compet.data.Reply;
 
 import java.lang.reflect.Type;
@@ -14,7 +15,7 @@ import okhttp3.Request;
  * Created by Mu on 2016-10-28.
  */
 
-public class ListReplyRequest extends AbstractRequest<Reply[]> {
+public class ListReplyRequest extends AbstractRequest<ListData<Reply>> {
 
     Request mRequest;
 
@@ -39,7 +40,7 @@ public class ListReplyRequest extends AbstractRequest<Reply[]> {
     }
     @Override
     protected Type getType() {
-        return new TypeToken<Reply[]>(){}.getType();
+        return new TypeToken<ListData<Reply>>(){}.getType();
     }
 
     @Override

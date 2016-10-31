@@ -26,7 +26,7 @@ import okhttp3.RequestBody;
 public class ListBoardRequest extends AbstractRequest<Board[]> {
 
     Request mRequest;
-    private final static String BOARDS = "board";
+    private final static String BOARDS = "boards";
 
     public ListBoardRequest(Context context, String pageNum, String lastBoardNum) {
         HttpUrl url = getBaseUrlBuilder()

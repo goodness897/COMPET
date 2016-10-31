@@ -5,11 +5,14 @@ import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 import com.mu.compet.data.Board;
+import com.mu.compet.data.ListData;
 
 import java.lang.reflect.Type;
 
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * Created by Tacademy on 2016-08-29.
@@ -21,22 +24,28 @@ import okhttp3.Request;
 //
 //        예시) /boards/{pageNum},{lastBoardNum}
 
-public class SearchBoardRequest extends AbstractRequest<Board> {
+public class SearchBoardRequest extends AbstractRequest<ListData<Board>> {
 
     Request mRequest;
     private final static String BOARDS = "boards";
     private final static String SEARCH_TYPE = "searchType";
     private final static String KEYWORD = "keyWord";
 
-    public SearchBoardRequest(Context context, String searchType, String keyWord) {
+    public SearchBoardRequest(Context context, String pageNum, String lastBoardNum, String searchType, String keyWord) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(BOARDS)
-                .addQueryParameter(SEARCH_TYPE, searchType)
-                .addQueryParameter(KEYWORD, keyWord)
+                .addPathSegment(pageNum)
+                .addPathSegment(lastBoardNum)
+                .build();
+
+        RequestBody body = new FormBody.Builder()
+                .add(SEARCH_TYPE, searchType)
+                .add(KEYWORD, keyWord)
                 .build();
 
         mRequest = new Request.Builder()
                 .url(url)
+                .post(body)
                 .tag(context)
                 .build();
         Log.i("url", mRequest.url().toString());
@@ -49,7 +58,7 @@ public class SearchBoardRequest extends AbstractRequest<Board> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<Board>() {
+        return new TypeToken<ListData<Board>>() {
         }.getType();
     }
 }

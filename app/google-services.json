@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "219700881093",
+    "firebase_url": "https://compet-b0294.firebaseio.com",
+    "project_id": "compet-b0294",
+    "storage_bucket": "compet-b0294.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219700881093:android:6a39cf77bf30c374",
+        "android_client_info": {
+          "package_name": "com.mu.compet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219700881093-i171ontehmkbj8me79dprs5385t2f8u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBigNexhsRI8_KpT2mBibZOPHFtW4ox6kU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

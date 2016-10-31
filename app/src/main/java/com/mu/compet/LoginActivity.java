@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -122,11 +123,13 @@ public class LoginActivity extends AppCompatActivity {
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
             @Override
             public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                Log.d("LoginActivity", "성공 : " + result.getMessage());
 
             }
 
             @Override
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("LoginActivity", "실패 : " + errorMessage);
 
             }
         });

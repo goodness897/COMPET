@@ -51,6 +51,8 @@ public class NewWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_write);
         initToolBar(getString(R.string.activity_new_write));
 
+        files = new File[3];
+
         editContent = (EditText) findViewById(R.id.edit_content);
 
         firstImage = (ImageView) findViewById(R.id.image_camera_first);
@@ -77,8 +79,8 @@ public class NewWriteActivity extends AppCompatActivity {
                 Bitmap resized = Bitmap.createScaledBitmap(bmImg, dstWidth, dstHeight, true);
                 Bitmap rotateBitmap = Bitmap.createBitmap(resized, 0, 0, resized.getWidth(), resized.getHeight(), matrix, true);
 
-                for(int i = 0; i < imageViews.length; i++) {
-                    if(imageViews[i].getDrawable() == null) {
+                for (int i = 0; i < imageViews.length; i++) {
+                    if (imageViews[i].getDrawable() == null) {
                         files[i] = new File(mContentFile.getAbsolutePath());
                         imageViews[i].setImageBitmap(rotateBitmap);
                         break;
@@ -228,10 +230,14 @@ public class NewWriteActivity extends AppCompatActivity {
                         Bitmap rotateBitmap = Bitmap.createBitmap(resized, 0, 0, resized.getWidth(), resized.getHeight(), matrix, true);
 
 
-                        for(int i = 0; i < imageViews.length; i++) {
-                            if(imageViews[i].getDrawable() == null) {
-                                files[i] = new File(path);
+                        for (int i = 0; i < imageViews.length; i++) {
+                            if (imageViews[i].getDrawable() == null) {
+                                if (files.length > 0) {
+                                    files[i] = new File(path);
+                                    Log.d("NewWriteActivity", files[i].getAbsolutePath());
+                                }
                                 imageViews[i].setImageBitmap(rotateBitmap);
+
                                 break;
                             }
                         }

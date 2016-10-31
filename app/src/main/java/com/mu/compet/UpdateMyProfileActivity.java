@@ -24,6 +24,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.UpdateProfileRequest;
+
 import java.io.File;
 
 public class UpdateMyProfileActivity extends AppCompatActivity {
@@ -35,6 +40,8 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
     File mSavedFile, mContentFile;
     private static final int RC_GET_IMAGE = 1;
     private static final int RC_CAMERA = 2;
+
+    File userFile = null;
 
     ImageView profileView;
 
@@ -144,8 +151,26 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_complete) {
             // 수정사항 변경 완료
+            String userNick = nickNameEditText.getText().toString();
 
-            finish();
+            UpdateProfileRequest request = new UpdateProfileRequest(this, userNick, userFile);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                @Override
+                public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                    Log.d("UpdateMyProfileActivity", "성공 : " + result.getMessage());
+                    finish();
+
+                }
+
+                @Override
+                public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                    Log.d("UpdateMyProfileActivity", "실패 : " + errorMessage);
+
+
+                }
+
+            });
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -170,6 +195,7 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
             case RC_CAMERA:
                 if (resultCode == Activity.RESULT_OK) {
                     mContentFile = mSavedFile;
+                    mContentFile = userFile;
                     Log.i("Image", "path : " + mContentFile.getAbsolutePath());
                 }
                 break;
@@ -185,6 +211,7 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         options.inSampleSize = 4;
                         String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+                        userFile = new File(path);
                         Bitmap bmImg = BitmapFactory.decodeFile(path, options);
                         Matrix matrix = new Matrix();
                         matrix.postRotate(90);

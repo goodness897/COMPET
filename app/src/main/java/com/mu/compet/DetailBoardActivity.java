@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mu.compet.data.Board;
+import com.mu.compet.data.ListData;
 import com.mu.compet.data.Reply;
 import com.mu.compet.data.ResultMessage;
 import com.mu.compet.manager.NetworkManager;
@@ -27,9 +28,9 @@ import com.mu.compet.request.ListReplyRequest;
 
 import java.util.Arrays;
 
-public class DetailPostActivity extends AppCompatActivity {
+public class DetailBoardActivity extends AppCompatActivity {
 
-    private String TAG = "DetailPostActivity";
+    private String TAG = "DetailBoardActivity";
 
     ListView listView;
     ReplyAdapter mAdapter;
@@ -72,11 +73,13 @@ public class DetailPostActivity extends AppCompatActivity {
                 NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
                     @Override
                     public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                        Log.d("DetailBoardActivity", "성공 : " + result.getMessage());
                         listReplyRequest();
                     }
 
                     @Override
                     public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                        Log.d("DetailBoardActivity", "실패 : " + errorMessage);
 
                     }
                 });
@@ -89,7 +92,6 @@ public class DetailPostActivity extends AppCompatActivity {
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_detail_header, null, false);
         initHeader(headerView, board);
-//        setHeaderView(board);
 
         listView.addHeaderView(headerView);
         mAdapter = new ReplyAdapter();
@@ -110,7 +112,6 @@ public class DetailPostActivity extends AppCompatActivity {
         contentText = (TextView) v.findViewById(R.id.text_post_content);
 
         setHeaderView(board);
-
 
     }
 
@@ -149,7 +150,7 @@ public class DetailPostActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_update) {
 
-            Intent intent = new Intent(DetailPostActivity.this, UpdatePostActivity.class);
+            Intent intent = new Intent(DetailBoardActivity.this, UpdatePostActivity.class);
             intent.putExtra("board", board);
             startActivity(intent);
 
@@ -188,18 +189,22 @@ public class DetailPostActivity extends AppCompatActivity {
         String pageNum = "1";
         String lastReplyNum = "1";
         ListReplyRequest request = new ListReplyRequest(this, boardNum, pageNum, lastReplyNum);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<Reply[]>() {
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<Reply>>() {
             @Override
-            public void onSuccess(NetworkRequest<Reply[]> request, Reply[] result) {
-                mAdapter.addAll(Arrays.asList(result));
+            public void onSuccess(NetworkRequest<ListData<Reply>> request, ListData<Reply> result) {
+
+                Log.d("DetailBoardActivity", "성공 : " + result.getMessage());
+                Reply[] reply = result.getData();
+
+                mAdapter.addAll(Arrays.asList(reply));
 
             }
 
             @Override
-            public void onFail(NetworkRequest<Reply[]> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<ListData<Reply>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("DetailBoardActivity", "실패 : " + errorMessage);
 
             }
         });
-
     }
 }

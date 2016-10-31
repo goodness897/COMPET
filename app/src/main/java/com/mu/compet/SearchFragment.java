@@ -14,6 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mu.compet.data.Board;
+import com.mu.compet.data.ListData;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.SearchBoardRequest;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +31,7 @@ import android.widget.TextView;
  */
 public class SearchFragment extends Fragment {
 
-//    Spinner typeSpinner;
+    //    Spinner typeSpinner;
     EditText keywordInputEditText;
     Button cancelButton;
 
@@ -110,24 +119,26 @@ public class SearchFragment extends Fragment {
 
     private void performSearch() {
 
-//        SearchBoardRequest request = new SearchBoardRequest(getContext(), "이름", "1");
-//        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<Board>() {
-//            @Override
-//            public void onSuccess(NetworkRequest<Board> request, Board result) {
-//
-//            }
-//
-//            @Override
-//            public void onFail(NetworkRequest<Board> request, int errorCode, String errorMessage, Throwable e) {
-//
-//            }
-//        });
+        SearchBoardRequest request = new SearchBoardRequest(getContext(), "1", "1", "name", "박무성");
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<Board>>() {
+            @Override
+            public void onSuccess(NetworkRequest<ListData<Board>> request, ListData<Board> result) {
+                Board[] board = result.getData();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ArrayList<Board> list = (ArrayList<Board>) Arrays.asList(board);
+                Fragment fragment = SearchResultFragment.newInstance(list);
+                ft.replace(R.id.container, fragment);
+                ft.commitAllowingStateLoss();
 
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        Fragment fragment = new SearchResultFragment();
-        ft.replace(R.id.container, fragment);
-        ft.commitAllowingStateLoss();
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ListData<Board>> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
+
 
     }
 

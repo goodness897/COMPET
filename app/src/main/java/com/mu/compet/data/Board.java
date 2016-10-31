@@ -16,10 +16,10 @@ public class Board implements Serializable{
     private String boardRegDate;
     private String boardUdtDate;
     private String boardFirstImg;
-    private int imgCnt;
-    private int audCnt;
-    private int vidCnt;
-    private int replyCnt;
+    private int boardImgCnt;
+    private int boardAudCnt;
+    private int boardVidCnt;
+    private int boardReplyCnt;
 
     public String getBoardFirstImg() {
         return boardFirstImg;
@@ -85,36 +85,36 @@ public class Board implements Serializable{
         this.boardUdtDate = boardUdtDate;
     }
 
-    public int getImgCnt() {
-        return imgCnt;
+    public int getBoardImgCnt() {
+        return boardImgCnt;
     }
 
-    public void setImgCnt(int imgCnt) {
-        this.imgCnt = imgCnt;
+    public void setBoardImgCnt(int boardImgCnt) {
+        this.boardImgCnt = boardImgCnt;
     }
 
-    public int getAudCnt() {
-        return audCnt;
+    public int getBoardAudCnt() {
+        return boardAudCnt;
     }
 
-    public void setAudCnt(int audCnt) {
-        this.audCnt = audCnt;
+    public void setBoardAudCnt(int boardAudCnt) {
+        this.boardAudCnt = boardAudCnt;
     }
 
-    public int getVidCnt() {
-        return vidCnt;
+    public int getBoardVidCnt() {
+        return boardVidCnt;
     }
 
-    public void setVidCnt(int vidCnt) {
-        this.vidCnt = vidCnt;
+    public void setBoardVidCnt(int boardVidCnt) {
+        this.boardVidCnt = boardVidCnt;
     }
 
-    public int getReplyCnt() {
-        return replyCnt;
+    public int getBoardReplyCnt() {
+        return boardReplyCnt;
     }
 
-    public void setReplyCnt(int replyCnt) {
-        this.replyCnt = replyCnt;
+    public void setBoardReplyCnt(int boardReplyCnt) {
+        this.boardReplyCnt = boardReplyCnt;
     }
 
 }

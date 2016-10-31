@@ -4,7 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.User;
+import com.mu.compet.data.ListData;
+import com.mu.compet.data.UserItemData;
 
 import java.lang.reflect.Type;
 
@@ -18,7 +19,7 @@ import okhttp3.Request;
 // userNum(int) 조회할 유저 번호
 // /user/{userNum}
 
-public class DetailUserRequest extends AbstractRequest<User> {
+public class DetailUserRequest extends AbstractRequest<UserItemData> {
     Request mRequest;
 
     private final static String USER = "user";
@@ -39,7 +40,7 @@ public class DetailUserRequest extends AbstractRequest<User> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<User>() {
+        return new TypeToken<ListData<UserItemData>>() {
         }.getType();
     }
 /*

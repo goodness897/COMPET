@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -95,12 +96,15 @@ public class SettingActivity extends AppCompatActivity {
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
             @Override
             public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
-                // 성공
+                Log.d("SettingActivity", "성공 : " + result.getMessage());
+
             }
 
             @Override
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
                 // 실패
+                Log.d("SettingActivity", "실패 : " + errorMessage);
+
             }
         });
     }
@@ -112,11 +116,15 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
                 // 성공
+                Log.d("SettingActivity", "성공 : " + result.getMessage());
+
             }
 
             @Override
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
                 // 실패
+                Log.d("SettingActivity", "실패 : " + errorMessage);
+
             }
         });
     }
