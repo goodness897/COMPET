@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.Board;
+import com.mu.compet.data.BoardItemData;
 
 import java.lang.reflect.Type;
 
@@ -20,7 +20,7 @@ import okhttp3.Request;
 //        boardNum(int) 보고싶은 게시글의 고유 번호
 //
 //        예시) /board/1
-public class DetailBoardRequest extends AbstractRequest<Board> {
+public class DetailBoardRequest extends AbstractRequest<BoardItemData> {
 
     Request mRequest;
     final static String BOARD = "board";
@@ -46,7 +46,7 @@ public class DetailBoardRequest extends AbstractRequest<Board> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<Board>() {
+        return new TypeToken<BoardItemData>() {
         }.getType();
     }
 }

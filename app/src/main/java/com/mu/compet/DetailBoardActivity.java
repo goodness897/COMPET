@@ -94,7 +94,8 @@ public class DetailBoardActivity extends AppCompatActivity {
         initHeader(headerView, board);
 
         listView.addHeaderView(headerView);
-        mAdapter = new ReplyAdapter();
+        String boardNum = String.valueOf(board.getBoardNum());
+        mAdapter = new ReplyAdapter(boardNum);
         listView.setAdapter(mAdapter);
 
         initData();
