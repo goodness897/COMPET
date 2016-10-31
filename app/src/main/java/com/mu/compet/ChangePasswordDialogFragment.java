@@ -12,6 +12,13 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.data.User;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.PasswordCheckRequest;
+import com.mu.compet.request.UpdateUserPasswordRequest;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,11 +76,41 @@ public class ChangePasswordDialogFragment extends DialogFragment {
         completeText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                String userPass = oldPasswordView.getText().toString();
+                PasswordCheckRequest request = new PasswordCheckRequest(getContext(), userPass);
+                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                        changePassword();
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+
+                    }
+                });
+
             }
         });
 
         return view;
+    }
+
+    private void changePassword() {
+        String newUserPass = newPasswordView.getText().toString();
+
+        UpdateUserPasswordRequest request = new UpdateUserPasswordRequest(getContext(), newUserPass);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<User>() {
+            @Override
+            public void onSuccess(NetworkRequest<User> request, User result) {
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<User> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
     }
 
     @Override

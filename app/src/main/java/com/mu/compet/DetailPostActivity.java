@@ -1,10 +1,11 @@
 package com.mu.compet;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,15 +16,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mu.compet.data.Board;
 import com.mu.compet.data.Reply;
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.AddReplyRequest;
+import com.mu.compet.request.DeleteBoardRequest;
+import com.mu.compet.request.ListReplyRequest;
 
-import java.util.Random;
+import java.util.Arrays;
 
 public class DetailPostActivity extends AppCompatActivity {
 
+    private String TAG = "DetailPostActivity";
+
     ListView listView;
     ReplyAdapter mAdapter;
-    EditText commentEdit;
+    EditText replyEdit;
     Button writeButton;
 
     ImageView profileImage;
@@ -34,31 +44,42 @@ public class DetailPostActivity extends AppCompatActivity {
     ImageView thirdImage;
     TextView contentText;
 
+    Board board;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_post);
         initToolBar(getString(R.string.activity_detail_post));
 
+        Intent intent = getIntent();
+        board = (Board) intent.getSerializableExtra("board");
+
+
         listView = (ListView) findViewById(R.id.listView);
 
 
-        commentEdit = (EditText)findViewById(R.id.edit_content);
-        writeButton = (Button)findViewById(R.id.btn_write_comment);
+        replyEdit = (EditText) findViewById(R.id.edit_content);
+        writeButton = (Button) findViewById(R.id.btn_write_comment);
 
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Random r = new Random();
-                String comment = commentEdit.getText().toString();
-                commentEdit.setText("");
-                Reply reply = new Reply();
-                reply.setNickName("name" + r.nextInt(10));
-                reply.setDate((r.nextInt(3) + 1) + "시간 전");
-                reply.setContent(comment);
-                reply.setProfileImage(ContextCompat.getDrawable(DetailPostActivity.this, resIds[1]));
-                mAdapter.add(reply);
+                String replyContent = replyEdit.getText().toString();
+                String boardNum = String.valueOf(board.getBoardNum());
+                AddReplyRequest request = new AddReplyRequest(v.getContext(), boardNum, replyContent);
+                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                        listReplyRequest();
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+
+                    }
+                });
 
                 listView.smoothScrollToPosition(mAdapter.getCount());
 //                listView.setSelection(mAdapter.getCount() - 1);
@@ -67,7 +88,7 @@ public class DetailPostActivity extends AppCompatActivity {
 
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_detail_header, null, false);
-        initHeader(headerView);
+        initHeader(headerView, board);
 //        setHeaderView(board);
 
         listView.addHeaderView(headerView);
@@ -79,22 +100,26 @@ public class DetailPostActivity extends AppCompatActivity {
 
     }
 
-    private void initHeader(View v) {
-        profileImage = (ImageView)v.findViewById(R.id.image_profile);
-        nickNameText = (TextView)v.findViewById(R.id.text_nickname);
-        postDateText = (TextView)v.findViewById(R.id.text_post_date);
-        firstImage = (ImageView)v.findViewById(R.id.image_post_first_image);
-        secondImage = (ImageView)v.findViewById(R.id.image_post_second_image);
-        thirdImage = (ImageView)v.findViewById(R.id.image_post_third_image);
-        contentText = (TextView)v.findViewById(R.id.text_post_content);
+    private void initHeader(View v, Board board) {
+        profileImage = (ImageView) v.findViewById(R.id.image_profile);
+        nickNameText = (TextView) v.findViewById(R.id.text_nickname);
+        postDateText = (TextView) v.findViewById(R.id.text_post_date);
+        firstImage = (ImageView) v.findViewById(R.id.image_post_first_image);
+        secondImage = (ImageView) v.findViewById(R.id.image_post_second_image);
+        thirdImage = (ImageView) v.findViewById(R.id.image_post_third_image);
+        contentText = (TextView) v.findViewById(R.id.text_post_content);
+
+        setHeaderView(board);
+
 
     }
 
-//    private void setHeaderView(Board board) {
-//        nickNameText.setText(board.getNickName());
-//        postDateText.setText(board.getDate());
-//        contentText.setText(board.getPostContent());
-//    }
+    private void setHeaderView(Board board) {
+        nickNameText.setText(board.getUserNick());
+        postDateText.setText(board.getBoardRegDate());
+        firstImage.setImageURI(Uri.parse(board.getBoardFirstImg()));
+        contentText.setText(board.getBoardContent());
+    }
 
     private void initToolBar(String title) {
 
@@ -125,33 +150,56 @@ public class DetailPostActivity extends AppCompatActivity {
         if (id == R.id.action_update) {
 
             Intent intent = new Intent(DetailPostActivity.this, UpdatePostActivity.class);
+            intent.putExtra("board", board);
             startActivity(intent);
 
 
         } else if (id == R.id.action_delete) {
+            String boardNum = String.valueOf(board.getBoardNum());
+            DeleteBoardRequest request = new DeleteBoardRequest(this, boardNum);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                @Override
+                public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                    Log.d(TAG, result.getMessage());
+                }
+
+                @Override
+                public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                    Log.d(TAG, errorMessage);
+
+                }
+            });
             finish();
 
         }
         return super.onOptionsItemSelected(item);
     }
 
-    int[] resIds = {R.drawable.sample_profile01, R.drawable.sample_profile02
-            , R.drawable.sample_profile03};
-
-    String sampleString = "this is sample comment ";
-
     private void initData() {
 
-        Random r = new Random();
+        listReplyRequest();
 
-        for (int i = 0; i < 3; i++) {
 
-            Reply reply = new Reply();
-            reply.setNickName("name" + i);
-            reply.setDate((r.nextInt(3) + 1) + "시간 전");
-            reply.setContent(sampleString);
-            reply.setProfileImage(ContextCompat.getDrawable(this, resIds[i % resIds.length]));
-            mAdapter.add(reply);
-        }
+    }
+
+    private void listReplyRequest() {
+
+        String boardNum = String.valueOf(board.getBoardNum());
+        String pageNum = "1";
+        String lastReplyNum = "1";
+        ListReplyRequest request = new ListReplyRequest(this, boardNum, pageNum, lastReplyNum);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<Reply[]>() {
+            @Override
+            public void onSuccess(NetworkRequest<Reply[]> request, Reply[] result) {
+                mAdapter.addAll(Arrays.asList(result));
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<Reply[]> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
+
     }
 }

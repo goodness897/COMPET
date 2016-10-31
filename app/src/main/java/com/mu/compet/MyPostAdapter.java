@@ -1,6 +1,7 @@
 package com.mu.compet;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,9 @@ import java.util.List;
 public class MyPostAdapter extends BaseAdapter {
     private List<Board> items = new ArrayList<>();
 
-    private ImageView postImageView;
+    private ImageView boardImageView;
     private TextView imageCountView;
-    private TextView postContentView;
+    private TextView boardContentView;
     private ImageView commentImageView;
     private TextView commentCountView;
     private RelativeLayout layout;
@@ -87,9 +88,9 @@ public class MyPostAdapter extends BaseAdapter {
     private void initView(View v, final Board board) {
 
         layout = (RelativeLayout) v.findViewById(R.id.layout);
-        postImageView = (ImageView) v.findViewById(R.id.image_post_first_image);
+        boardImageView = (ImageView) v.findViewById(R.id.image_post_first_image);
         imageCountView = (TextView) v.findViewById(R.id.text_image_count);
-        postContentView = (TextView) v.findViewById(R.id.text_post_content);
+        boardContentView = (TextView) v.findViewById(R.id.text_post_content);
         commentImageView = (ImageView) v.findViewById(R.id.image_comment);
         commentCountView = (TextView) v.findViewById(R.id.text_comment_count);
 
@@ -106,9 +107,9 @@ public class MyPostAdapter extends BaseAdapter {
 
     private void setBoardView(Board board) {
 
-        postImageView.setImageDrawable(board.getPostImage());
-        imageCountView.setText(board.getImageCount());
-        postContentView.setText(board.getPostContent());
-        commentCountView.setText(board.getReplyCount());
+        boardImageView.setImageURI(Uri.parse(board.getBoardFirstImg()));
+        imageCountView.setText(board.getImgCnt());
+        boardContentView.setText(board.getBoardContent());
+        commentCountView.setText(board.getReplyCnt());
     }
 }

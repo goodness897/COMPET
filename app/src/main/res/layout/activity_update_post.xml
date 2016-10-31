@@ -35,7 +35,7 @@
         android:ems="10"
         android:hint="@string/edit_search_keyword"
         android:inputType="textMultiLine"
-        android:paddingLeft="@dimen/login_margin_left"
+        android:paddingLeft="24dp"
         android:theme="@style/SearchTextLabel"
         android:gravity="top" />
 

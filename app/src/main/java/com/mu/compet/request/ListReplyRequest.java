@@ -14,7 +14,7 @@ import okhttp3.Request;
  * Created by Mu on 2016-10-28.
  */
 
-public class ListReplyRequest extends AbstractRequest<Reply> {
+public class ListReplyRequest extends AbstractRequest<Reply[]> {
 
     Request mRequest;
 
@@ -39,7 +39,7 @@ public class ListReplyRequest extends AbstractRequest<Reply> {
     }
     @Override
     protected Type getType() {
-        return new TypeToken<Reply>(){}.getType();
+        return new TypeToken<Reply[]>(){}.getType();
     }
 
     @Override

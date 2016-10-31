@@ -11,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.LoginRequest;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText inputId;
@@ -95,7 +100,22 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginButtonClicked(View view) {
 
-        /*String userId = inputId.getText().toString();
+
+//        loginRequest();
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    public void signUpButtonClicked(View view) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    private void loginRequest() {
+        String userId = inputId.getText().toString();
         String userPass = inputPassword.getText().toString();
 
         LoginRequest request = new LoginRequest(this, userId, userPass);
@@ -109,16 +129,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
 
             }
-        });*/
-
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-
-    }
-
-    public void signUpButtonClicked(View view) {
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-        startActivity(intent);
+        });
     }
 }

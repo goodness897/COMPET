@@ -4,15 +4,12 @@ package com.mu.compet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.mu.compet.data.Board;
-
-import java.util.Random;
 
 
 /**
@@ -65,27 +62,9 @@ public class MyPageAllPostFragment extends Fragment {
         return view;
     }
 
-    int[] resIds = {R.drawable.image_sample_post01, R.drawable.image_sample_post02
-            , R.drawable.image_sample_post03, R.drawable.image_sample_post04};
-
-    String sampleString = "this is sample content ";
 
     private void initData() {
-        StringBuilder sampleStringBuilder = new StringBuilder();
-        Random r = new Random();
 
-        for (int i = 0; i < 10; i++) {
-            sampleStringBuilder.append(sampleString);
-            for (int j = 0; j < i; j++) {
-                sampleStringBuilder.append(sampleString);
-            }
-            Board p = new Board();
-            p.setReplyCount("+" + r.nextInt(10));
-            p.setPostContent(sampleStringBuilder.toString() + i);
-            p.setImageCount("+" + r.nextInt(3));
-            p.setPostImage(ContextCompat.getDrawable(getContext(), resIds[i % resIds.length]));
-            mAdapter.add(p);
-        }
     }
 
 }

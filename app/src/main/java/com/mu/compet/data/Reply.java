@@ -1,7 +1,5 @@
 package com.mu.compet.data;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by Mu on 2016-10-20.
  */
@@ -12,45 +10,63 @@ public class Reply implements java.io.Serializable {
     private String userNick;
     private String userId;
     private int replyNum;
-    private String replycontent;
+    private String replyContent;
     private String replyRegDate;
     private String replyUdtDate;
 
-
-    private Drawable profileImage;
-    private String nickName;
-    private String date;
-    private String content;
-
-    public Drawable getProfileImage() {
-        return profileImage;
+    public int getUserNum() {
+        return userNum;
     }
 
-    public void setProfileImage(Drawable profileImage) {
-        this.profileImage = profileImage;
+    public void setUserNum(int userNum) {
+        this.userNum = userNum;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUserNick() {
+        return userNick;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
     }
 
-    public String getDate() {
-        return date;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getContent() {
-        return content;
+    public int getReplyNum() {
+        return replyNum;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setReplyNum(int replyNum) {
+        this.replyNum = replyNum;
+    }
+
+    public String getReplyContent() {
+        return replyContent;
+    }
+
+    public void setReplyContent(String replyContent) {
+        this.replyContent = replyContent;
+    }
+
+    public String getReplyRegDate() {
+        return replyRegDate;
+    }
+
+    public void setReplyRegDate(String replyRegDate) {
+        this.replyRegDate = replyRegDate;
+    }
+
+    public String getReplyUdtDate() {
+        return replyUdtDate;
+    }
+
+    public void setReplyUdtDate(String replyUdtDate) {
+        this.replyUdtDate = replyUdtDate;
     }
 }

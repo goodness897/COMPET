@@ -19,8 +19,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.mu.compet.data.ResultMessage;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.AddBoardRequest;
 
 import java.io.File;
 
@@ -33,6 +40,9 @@ public class NewWriteActivity extends AppCompatActivity {
     ImageView secondImage;
     ImageView thirdImage;
     ImageView[] imageViews;
+    File[] files;
+
+    EditText editContent;
 
 
     @Override
@@ -40,6 +50,8 @@ public class NewWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_write);
         initToolBar(getString(R.string.activity_new_write));
+
+        editContent = (EditText) findViewById(R.id.edit_content);
 
         firstImage = (ImageView) findViewById(R.id.image_camera_first);
         secondImage = (ImageView) findViewById(R.id.image_camera_second);
@@ -67,6 +79,7 @@ public class NewWriteActivity extends AppCompatActivity {
 
                 for(int i = 0; i < imageViews.length; i++) {
                     if(imageViews[i].getDrawable() == null) {
+                        files[i] = new File(mContentFile.getAbsolutePath());
                         imageViews[i].setImageBitmap(rotateBitmap);
                         break;
                     }
@@ -147,13 +160,26 @@ public class NewWriteActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        String boardContent = editContent.getText().toString();
+
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_complete) {
-            finish();
+            AddBoardRequest request = new AddBoardRequest(this, boardContent, files);
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                @Override
+                public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                    Toast.makeText(NewWriteActivity.this, "Success", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+
+                @Override
+                public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                    Toast.makeText(NewWriteActivity.this, "Fail", Toast.LENGTH_LONG).show();
+
+                }
+            });
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -201,8 +227,10 @@ public class NewWriteActivity extends AppCompatActivity {
                         Bitmap resized = Bitmap.createScaledBitmap(bmImg, dstWidth, dstHeight, true);
                         Bitmap rotateBitmap = Bitmap.createBitmap(resized, 0, 0, resized.getWidth(), resized.getHeight(), matrix, true);
 
+
                         for(int i = 0; i < imageViews.length; i++) {
                             if(imageViews[i].getDrawable() == null) {
+                                files[i] = new File(path);
                                 imageViews[i].setImageBitmap(rotateBitmap);
                                 break;
                             }

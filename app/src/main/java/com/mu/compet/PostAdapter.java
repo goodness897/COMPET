@@ -1,6 +1,7 @@
 package com.mu.compet;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +29,8 @@ public class PostAdapter extends BaseAdapter {
     private ImageView postImageView;
     private TextView imageCountView;
     private TextView postContentView;
-    private ImageView commentImageView;
-    private TextView commentCountView;
+    private ImageView replyImageView;
+    private TextView replyCountView;
 
     public void add(Board board) {
         items.add(board);
@@ -105,8 +106,8 @@ public class PostAdapter extends BaseAdapter {
         postImageView = (ImageView) v.findViewById(R.id.image_post_first_image);
         imageCountView = (TextView) v.findViewById(R.id.text_image_count);
         postContentView = (TextView) v.findViewById(R.id.text_post_content);
-        commentImageView = (ImageView) v.findViewById(R.id.image_comment);
-        commentCountView = (TextView) v.findViewById(R.id.text_comment_count);
+        replyImageView = (ImageView) v.findViewById(R.id.image_comment);
+        replyCountView = (TextView) v.findViewById(R.id.text_comment_count);
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +131,14 @@ public class PostAdapter extends BaseAdapter {
     }
 
     private void setBoardView(Board board) {
-        profileImageView.setImageDrawable(board.getProfileImage());
-        nickNameTextView.setText(board.getNickName());
-        dateView.setText(board.getDate());
-        postImageView.setImageDrawable(board.getPostImage());
-        imageCountView.setText(board.getImageCount());
-        postContentView.setText(board.getPostContent());
-        commentCountView.setText(board.getReplyCount());
+//        profileImageView.setImageURI(Uri.parse(board.getuser()));
+        nickNameTextView.setText(board.getUserNick());
+        dateView.setText(board.getBoardRegDate());
+        postContentView.setText(board.getBoardContent());
+        if(board.getBoardFirstImg() != null) {
+            postImageView.setImageURI(Uri.parse(board.getBoardFirstImg()));
+        }
+        imageCountView.setText(board.getImgCnt());
+        replyCountView.setText(board.getReplyCnt());
     }
 }

@@ -4,15 +4,12 @@ package com.mu.compet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.mu.compet.data.Board;
-
-import java.util.Random;
 
 
 /**
@@ -53,9 +50,9 @@ public class SearchResultFragment extends Fragment {
         mAdapter.setOnUserClickListener(new PostAdapter.OnUserClickListener() {
             @Override
             public void onUserClick(View view, Board board) {
-                String nickName = board.getNickName();
+
                 Intent intent = new Intent(getContext(), DetailUserActivity.class);
-                intent.putExtra("NickName", nickName);
+                intent.putExtra("board", board);
                 startActivity(intent);
 
             }
@@ -64,6 +61,7 @@ public class SearchResultFragment extends Fragment {
             @Override
             public void onPostClick(View view, Board board) {
                 Intent intent = new Intent(getContext(), DetailPostActivity.class);
+                intent.putExtra("board", board);
                 startActivity(intent);
             }
         });
@@ -73,29 +71,9 @@ public class SearchResultFragment extends Fragment {
         return view;
     }
 
-    int[] resIds = {R.drawable.image_sample_post01, R.drawable.image_sample_post02
-            , R.drawable.image_sample_post03, R.drawable.image_sample_post04};
-
-    String sampleString = "this is sample content ";
 
     private void initData() {
-        StringBuilder sampleStringBuilder = new StringBuilder();
-        Random r = new Random();
 
-
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < i; j++) {
-                sampleStringBuilder.append(sampleString);
-            }
-            Board p = new Board();
-            p.setReplyCount("+3");
-            p.setDate("2016년 " + "10월 " + r.nextInt(30) + "일");
-            p.setProfileImage(ContextCompat.getDrawable(getContext(), R.drawable.image_default_profile));
-            p.setNickName("name " + i);
-            p.setPostContent(sampleStringBuilder.toString() + i);
-            p.setPostImage(ContextCompat.getDrawable(getContext(), resIds[i % resIds.length]));
-            mAdapter.add(p);
-        }
     }
 
 }

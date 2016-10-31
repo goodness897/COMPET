@@ -4,7 +4,12 @@ package com.mu.compet;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,10 +25,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mu.compet.data.ResultMessage;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.IdDuplicateCheckRequest;
+import com.mu.compet.request.NickNameDuplicateCheckRequest;
 import com.mu.compet.request.SignUpRequest;
 
 import java.io.File;
@@ -79,7 +87,6 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         imageCamera.bringToFront();
-
 
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         if (!path.exists()) {
@@ -207,7 +214,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Log.d("result", "실패 : " + errorCode);
 
 
-
             }
         });
 
@@ -216,10 +222,40 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void duplicateIdCheckClicked(View view) {
         // id 중복 요청
+        String userId = editId.getText().toString();
+        IdDuplicateCheckRequest request = new IdDuplicateCheckRequest(this, userId);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+            @Override
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                Toast.makeText(SignUpActivity.this, "사용가능한 아이디입니다.", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                Toast.makeText(SignUpActivity.this, "실패", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 
     public void duplicateNickNameCheckClicked(View view) {
         // nickname 중복 요청
+        String nickName = editNickName.getText().toString();
+        NickNameDuplicateCheckRequest request = new NickNameDuplicateCheckRequest(this, nickName);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+            @Override
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                Toast.makeText(SignUpActivity.this, "사용가능한 닉네임입니다.", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                Toast.makeText(SignUpActivity.this, "실패", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -235,7 +271,8 @@ public class SignUpActivity extends AppCompatActivity {
                     Bundle extras = intent.getExtras();
                     if (extras != null) {
                         Bitmap bitmap = (Bitmap) extras.get("data");
-                        imageProfile.setImageBitmap(bitmap);
+                        Bitmap circleBitmap = circleImage(bitmap);
+                        imageProfile.setImageBitmap(circleBitmap);
 
                         if (mCurrentPhotoPath != null) {
                             File f = new File(mCurrentPhotoPath);
@@ -265,6 +302,27 @@ public class SignUpActivity extends AppCompatActivity {
         //retrieve data on return
         cropIntent.putExtra("return-data", true);
         startActivityForResult(cropIntent, RC_CROP);
+    }
+
+    private Bitmap circleImage(Bitmap bitmapimg) {
+
+        Bitmap output = Bitmap.createBitmap(bitmapimg.getWidth(),
+                bitmapimg.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmapimg.getWidth(),
+                bitmapimg.getHeight());
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawCircle(bitmapimg.getWidth() / 2,
+                bitmapimg.getHeight() / 2, bitmapimg.getWidth() / 2, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmapimg, rect, rect, paint);
+        return output;
     }
 
     public Bitmap getBitmap() {
@@ -361,7 +419,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current state
-        if(contentUri != null) {
+        if (contentUri != null) {
             savedInstanceState.putString("media_url", contentUri.toString());
         }
         // Always call the superclass so it can save the view hierarchy state

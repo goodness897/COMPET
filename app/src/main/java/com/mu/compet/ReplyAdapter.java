@@ -23,15 +23,16 @@ public class ReplyAdapter extends BaseAdapter {
     private ImageView profileImageView;
     private TextView nickNameTextView;
     private TextView dateView;
-    private TextView commentView;
+    private TextView replyView;
 
     public void add(Reply reply) {
         items.add(reply);
         notifyDataSetChanged();
     }
 
-    public void addAll(List<Reply> items) {
-        this.items.addAll(items);
+    public void addAll(List<Reply> replyList) {
+        if(!items.isEmpty()) items.clear();
+        items.addAll(replyList);
         notifyDataSetChanged();
     }
 
@@ -84,14 +85,14 @@ public class ReplyAdapter extends BaseAdapter {
         profileImageView = (ImageView) v.findViewById(R.id.image_profile);
         nickNameTextView = (TextView) v.findViewById(R.id.text_nickname);
         dateView = (TextView) v.findViewById(R.id.text_time);
-        commentView = (TextView) v.findViewById(R.id.text_comment_content);
+        replyView = (TextView) v.findViewById(R.id.text_comment_content);
 
     }
 
     private void setReplyView(Reply reply) {
-        profileImageView.setImageDrawable(reply.getProfileImage());
-        nickNameTextView.setText(reply.getNickName());
-        dateView.setText(reply.getDate());
-        commentView.setText(reply.getContent());
+//        profileImageView.setImageDrawable(rep());
+        nickNameTextView.setText(reply.getUserNick());
+        dateView.setText(reply.getReplyRegDate());
+        replyView.setText(reply.getReplyContent());
     }
 }

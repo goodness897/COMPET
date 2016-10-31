@@ -1,7 +1,5 @@
 package com.mu.compet.data;
 
-import android.graphics.drawable.Drawable;
-
 import java.io.Serializable;
 
 /**
@@ -17,77 +15,106 @@ public class Board implements Serializable{
     private String boardContent;
     private String boardRegDate;
     private String boardUdtDate;
-    private int boardImgCnt;
-    private int boardAudCnt;
-    private int BoardVidCnt;
-    private int boardReplyCnt;
-    private int boardFirstImg;
+    private String boardFirstImg;
+    private int imgCnt;
+    private int audCnt;
+    private int vidCnt;
+    private int replyCnt;
 
-
-    private Drawable profileImage;
-    private String nickName;
-    private String date;
-    private Drawable postImage;
-    private String imageCount;
-    private String postContent;
-    private String replyCount;
-
-
-    public Drawable getProfileImage() {
-        return profileImage;
+    public String getBoardFirstImg() {
+        return boardFirstImg;
     }
 
-    public void setProfileImage(Drawable profileImage) {
-        this.profileImage = profileImage;
+    public void setBoardFirstImg(String boardFirstImg) {
+        this.boardFirstImg = boardFirstImg;
     }
 
-    public String getNickName() {
-        return nickName;
+    public int getUserNum() {
+        return userNum;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUserNum(int userNum) {
+        this.userNum = userNum;
     }
 
-    public String getDate() {
-        return date;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Drawable getPostImage() {
-        return postImage;
+    public String getUserNick() {
+        return userNick;
     }
 
-    public void setPostImage(Drawable postImage) {
-        this.postImage = postImage;
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
     }
 
-    public String getImageCount() {
-        return imageCount;
+    public int getBoardNum() {
+        return boardNum;
     }
 
-    public void setImageCount(String imageCount) {
-        this.imageCount = imageCount;
+    public void setBoardNum(int boardNum) {
+        this.boardNum = boardNum;
     }
 
-    public String getPostContent() {
-        return postContent;
+    public String getBoardContent() {
+        return boardContent;
     }
 
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
+    public void setBoardContent(String boardContent) {
+        this.boardContent = boardContent;
     }
 
-    public String getReplyCount() {
-        return replyCount;
+    public String getBoardRegDate() {
+        return boardRegDate;
     }
 
-    public void setReplyCount(String replyCount) {
-        this.replyCount = replyCount;
+    public void setBoardRegDate(String boardRegDate) {
+        this.boardRegDate = boardRegDate;
     }
 
+    public String getBoardUdtDate() {
+        return boardUdtDate;
+    }
+
+    public void setBoardUdtDate(String boardUdtDate) {
+        this.boardUdtDate = boardUdtDate;
+    }
+
+    public int getImgCnt() {
+        return imgCnt;
+    }
+
+    public void setImgCnt(int imgCnt) {
+        this.imgCnt = imgCnt;
+    }
+
+    public int getAudCnt() {
+        return audCnt;
+    }
+
+    public void setAudCnt(int audCnt) {
+        this.audCnt = audCnt;
+    }
+
+    public int getVidCnt() {
+        return vidCnt;
+    }
+
+    public void setVidCnt(int vidCnt) {
+        this.vidCnt = vidCnt;
+    }
+
+    public int getReplyCnt() {
+        return replyCnt;
+    }
+
+    public void setReplyCnt(int replyCnt) {
+        this.replyCnt = replyCnt;
+    }
 
 }
