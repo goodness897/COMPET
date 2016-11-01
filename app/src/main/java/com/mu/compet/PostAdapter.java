@@ -139,7 +139,7 @@ public class PostAdapter extends BaseAdapter {
         if(board.getBoardFirstImg() != null) {
             postImageView.setImageURI(Uri.parse(board.getBoardFirstImg()));
         }
-        imageCountView.setText(board.getBoardImgCnt());
-        replyCountView.setText(board.getBoardReplyCnt());
+        imageCountView.setText("+" + board.getBoardImgCnt());
+        replyCountView.setText("+" + board.getBoardReplyCnt());
     }
 }

@@ -4,12 +4,19 @@ package com.mu.compet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.mu.compet.data.Board;
+import com.mu.compet.data.ListData;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.SearchBoardRequest;
+
+import java.util.Arrays;
 
 
 /**
@@ -27,10 +34,10 @@ public class UserAllPostFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static UserAllPostFragment newInstance() {
+    public static UserAllPostFragment newInstance(String userNick) {
         UserAllPostFragment fragment = new UserAllPostFragment();
         Bundle args = new Bundle();
-
+        args.putString("userNick", userNick);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,6 +46,10 @@ public class UserAllPostFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+
+            String userNick = getArguments().getString("userNick");
+            initData(userNick);
+
         }
     }
 
@@ -57,12 +68,31 @@ public class UserAllPostFragment extends Fragment {
             }
         });
         listView.setAdapter(mAdapter);
-        initData();
 
         return view;
     }
 
-    private void initData() {
+    private void initData(String userNick) {
+
+        SearchBoardRequest request = new SearchBoardRequest(getContext(), "1", "1", "name", userNick);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<Board>>() {
+            @Override
+            public void onSuccess(NetworkRequest<ListData<Board>> request, ListData<Board> result) {
+
+                Log.d("DetailUserActivity", "성공 : " + result.getMessage());
+
+                Board[] board = result.getData();
+
+                mAdapter.addAll(Arrays.asList(board));
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ListData<Board>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("DetailUserActivity", "성공 : " + errorMessage);
+
+
+            }
+        });
 
     }
 

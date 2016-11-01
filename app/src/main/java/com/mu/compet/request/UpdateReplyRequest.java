@@ -26,7 +26,7 @@ public class UpdateReplyRequest extends AbstractRequest<ResultMessage> {
     private final static String REPLY_CONTENT = "replyContent";
 
     public UpdateReplyRequest(Context context, String boardNum, String replyNum, String replyContent) {
-        
+
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(BOARD)
                 .addPathSegment(boardNum)
@@ -34,14 +34,13 @@ public class UpdateReplyRequest extends AbstractRequest<ResultMessage> {
                 .addPathSegment(replyNum)
                 .build();
 
-
         RequestBody body = new FormBody.Builder()
                 .add(REPLY_CONTENT, replyContent)
                 .build();
 
         mRequest = new Request.Builder()
                 .url(url)
-                .put(body)
+                .post(body)
                 .tag(context)
                 .build();
 

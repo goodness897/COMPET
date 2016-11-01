@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.User;
+import com.mu.compet.data.ResultMessage;
 
 import java.lang.reflect.Type;
 
@@ -16,7 +16,7 @@ import okhttp3.Request;
 /**
  * Created by jeon on 2016-09-04.
  */
-public class UpdateUserPasswordRequest extends AbstractRequest<User> {
+public class UpdateUserPasswordRequest extends AbstractRequest<ResultMessage> {
     Request mRequest;
 
     MediaType jpeg = MediaType.parse("image/jpeg");
@@ -36,7 +36,7 @@ public class UpdateUserPasswordRequest extends AbstractRequest<User> {
 
         mRequest = new Request.Builder()
                 .url(url)
-                .put(requestBody)
+                .post(requestBody)
                 .tag(context)
                 .build();
 
@@ -46,7 +46,7 @@ public class UpdateUserPasswordRequest extends AbstractRequest<User> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<User>() {
+        return new TypeToken<ResultMessage>() {
         }.getType();
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.mu.compet.data.ListData;
 import com.mu.compet.data.UserItemData;
 
 import java.lang.reflect.Type;
@@ -40,7 +39,7 @@ public class DetailUserRequest extends AbstractRequest<UserItemData> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<ListData<UserItemData>>() {
+        return new TypeToken<UserItemData>() {
         }.getType();
     }
 /*

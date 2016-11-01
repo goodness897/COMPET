@@ -22,7 +22,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mu.compet.data.ResultMessage;
 import com.mu.compet.manager.NetworkManager;
@@ -171,13 +170,13 @@ public class NewWriteActivity extends AppCompatActivity {
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
                 @Override
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
-                    Toast.makeText(NewWriteActivity.this, "Success", Toast.LENGTH_LONG).show();
+                    Log.d("NewWriteActivity", "성공 : " + result.getMessage());
                     finish();
                 }
 
                 @Override
                 public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
-                    Toast.makeText(NewWriteActivity.this, "Fail", Toast.LENGTH_LONG).show();
+                    Log.d("NewWriteActivity", "실패 : " + errorMessage);
 
                 }
             });

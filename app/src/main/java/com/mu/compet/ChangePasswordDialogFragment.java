@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mu.compet.data.ResultMessage;
-import com.mu.compet.data.User;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.PasswordCheckRequest;
@@ -100,14 +100,18 @@ public class ChangePasswordDialogFragment extends DialogFragment {
         String newUserPass = newPasswordView.getText().toString();
 
         UpdateUserPasswordRequest request = new UpdateUserPasswordRequest(getContext(), newUserPass);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<User>() {
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
             @Override
-            public void onSuccess(NetworkRequest<User> request, User result) {
+            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
 
+                Log.d("ChangePassword", "성공" + result.getMessage());
+                dismiss();
             }
 
             @Override
-            public void onFail(NetworkRequest<User> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("ChangePassword", "실패" + errorMessage);
+
 
             }
         });

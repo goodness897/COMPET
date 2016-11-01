@@ -57,7 +57,7 @@ public class UpdateBoardRequest extends AbstractRequest<ResultMessage> {
 
         mRequest = new Request.Builder()
                 .url(url)
-                .put(requestBody)
+                .post(requestBody)
                 .tag(context)
                 .build();
 

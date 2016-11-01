@@ -19,6 +19,7 @@ import com.mu.compet.data.ResultMessage;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.DeleteReplyRequest;
+import com.mu.compet.request.UpdateReplyRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,11 @@ public class ReplyAdapter extends BaseAdapter {
     private TextView dateView;
     private TextView replyTextView;
     private EditText editReplyView;
+    private TextView updateView;
 
 
     private ViewSwitcher viewSwitcher;
+    private ViewSwitcher viewUpdateSwitcher;
 
 
 
@@ -107,6 +110,8 @@ public class ReplyAdapter extends BaseAdapter {
         ImageButton updateButton;
         final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         viewSwitcher = (ViewSwitcher) v.findViewById(R.id.view_switcher);
+        viewUpdateSwitcher = (ViewSwitcher) v.findViewById(R.id.view_update_switcher);
+        updateView = (TextView)v.findViewById(R.id.text_update);
         profileImageView = (ImageView) v.findViewById(R.id.image_profile);
         nickNameTextView = (TextView) v.findViewById(R.id.text_nickname);
         dateView = (TextView) v.findViewById(R.id.text_time);
@@ -142,9 +147,35 @@ public class ReplyAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 viewSwitcher.showNext();
+                viewUpdateSwitcher.showNext();
                 String content = replyTextView.getText().toString();
                 editReplyView.setText(content);
 
+            }
+        });
+
+        updateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewUpdateSwitcher.showNext();
+                viewSwitcher.showNext();
+                String content = editReplyView.getText().toString();
+                replyTextView.setText(content);
+                UpdateReplyRequest request = new UpdateReplyRequest(view.getContext(), boardNum,
+                        String.valueOf(reply.getReplyNum()), content);
+                NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                        Log.d("DetailBoardActivity", "성공 : " + result.getMessage());
+
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                        Log.d("DetailBoardActivity", "실패 : " + errorMessage);
+
+                    }
+                });
             }
         });
 

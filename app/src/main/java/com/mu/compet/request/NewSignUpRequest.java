@@ -16,43 +16,53 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
- * Created by jeon on 2016-09-04.
+ * Created by Mu on 2016-11-01.
  */
-public class UpdateProfileRequest extends AbstractRequest<ResultMessage> {
+
+public class NewSignUpRequest extends AbstractRequest<ResultMessage> {
+
     Request mRequest;
 
-    MediaType jpeg = MediaType.parse("image/jpeg");
-    private final static String PROFILE = "profile";
-    private final static String USER_NICKNAME = "userNick";
+    private final static String USER = "user";
+    private final static String USER_ID = "userId";
+    private final static String USER_PASS = "userPass";
+    private final static String USER_NICK = "userNick";
     private final static String USER_FILE = "userFile";
 
-    public UpdateProfileRequest(Context context, String userNick, File userFile) {
+    MediaType jpeg = MediaType.parse("image/jpeg");
+
+    public NewSignUpRequest(Context context, String userId, String userPass, String userNick, File userFile) {
         HttpUrl url = getBaseUrlBuilder()
-                .addPathSegment(PROFILE)
+                .addPathSegment(USER)
                 .build();
 
-        MultipartBody.Builder body = new MultipartBody.Builder()
+       MultipartBody.Builder body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart(USER_NICKNAME, userNick);
+                .addFormDataPart(USER_ID, userId)
+                .addFormDataPart(USER_PASS, userPass)
+                .addFormDataPart(USER_NICK, userNick);
+
+
         if (userFile != null) {
             body.addFormDataPart(USER_FILE, userFile.getName(),
                     RequestBody.create(jpeg, userFile));
-
         } else {
             body.addFormDataPart(USER_FILE, "");
         }
 
-        MultipartBody requestBody = body.build();
+        RequestBody requestBody = body.build();
 
         mRequest = new Request.Builder()
                 .url(url)
+                .method("POST", RequestBody.create(null, new byte[0]))
                 .post(requestBody)
                 .tag(context)
                 .build();
 
-        Log.i("url", mRequest.url().toString());
+        Log.i("url", url.toString());
 
     }
+
 
     @Override
     protected Type getType() {

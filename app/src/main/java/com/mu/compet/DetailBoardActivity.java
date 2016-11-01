@@ -1,7 +1,6 @@
 package com.mu.compet;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,8 +54,6 @@ public class DetailBoardActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         board = (Board) intent.getSerializableExtra("board");
-
-
         listView = (ListView) findViewById(R.id.listView);
 
 
@@ -119,7 +116,7 @@ public class DetailBoardActivity extends AppCompatActivity {
     private void setHeaderView(Board board) {
         nickNameText.setText(board.getUserNick());
         postDateText.setText(board.getBoardRegDate());
-        firstImage.setImageURI(Uri.parse(board.getBoardFirstImg()));
+//        firstImage.setImageURI(Uri.parse(board.getBoardFirstImg()));
         contentText.setText(board.getBoardContent());
     }
 
@@ -196,7 +193,6 @@ public class DetailBoardActivity extends AppCompatActivity {
 
                 Log.d("DetailBoardActivity", "성공 : " + result.getMessage());
                 Reply[] reply = result.getData();
-
                 mAdapter.addAll(Arrays.asList(reply));
 
             }

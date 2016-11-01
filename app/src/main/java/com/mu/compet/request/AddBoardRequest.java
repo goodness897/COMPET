@@ -38,7 +38,7 @@ public class AddBoardRequest extends AbstractRequest<ResultMessage> {
     private final static String USER_NICKNAME = "userNick";
     private final static String USER_FILE = "userFile";
 
-    public AddBoardRequest(Context context, String boardContent,  File[] files) {
+    public AddBoardRequest(Context context, String boardContent, File[] files) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(BOARD)
                 .build();
@@ -47,10 +47,12 @@ public class AddBoardRequest extends AbstractRequest<ResultMessage> {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart(BOARD_CONTENT, boardContent);
 
-        if (files != null) {
-            for(int i = 0; i < files.length; i++) {
-                body.addFormDataPart(USER_FILE, files[i].getName(),
-                        RequestBody.create(jpeg, files[i]));
+        if (files.length > 0) {
+            for (File image_file : files) {
+                if (image_file != null) {
+                    body.addFormDataPart(USER_FILE, image_file.getName(),
+                            RequestBody.create(jpeg, image_file));
+                }
             }
         } else {
             body.addFormDataPart(USER_FILE, "");

@@ -62,4 +62,12 @@ public abstract class AbstractRequest<T> extends NetworkRequest<T> {
     }
 
     protected abstract Type getType();
+
+    public static String getHOST() {
+        return HOST;
+    }
+
+    public static int getHttpPort() {
+        return HTTP_PORT;
+    }
 }

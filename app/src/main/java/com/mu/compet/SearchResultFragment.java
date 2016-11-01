@@ -4,14 +4,19 @@ package com.mu.compet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.mu.compet.data.Board;
+import com.mu.compet.data.ListData;
+import com.mu.compet.manager.NetworkManager;
+import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.SearchBoardRequest;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -22,18 +27,18 @@ import java.util.ArrayList;
 public class SearchResultFragment extends Fragment {
     ListView listView;
     PostAdapter mAdapter;
-    ArrayList<Board> items;
+    String keyWord;
 
 
     public SearchResultFragment() {
         // Required empty public constructor
     }
 
-    public static SearchResultFragment newInstance(ArrayList<Board> items) {
+    public static SearchResultFragment newInstance(String keyWord) {
 
         SearchResultFragment fragment = new SearchResultFragment();
         Bundle args = new Bundle();
-        args.putSerializable("board", items);
+        args.putString("keyword", keyWord);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,16 +47,40 @@ public class SearchResultFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            items = new ArrayList<>();
-            items = (ArrayList<Board>) getArguments().getSerializable("board");
+            String keyword = getArguments().getString("keyword");
+            performSearch(keyword);
 
         }
     }
+    private void performSearch(String keyWord) {
+
+        SearchBoardRequest request = new SearchBoardRequest(getContext(), "1", "1", "name", keyWord);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<Board>>() {
+            @Override
+            public void onSuccess(NetworkRequest<ListData<Board>> request, ListData<Board> result) {
+                Log.d("SearchFragment", "성공 : " + result.getMessage());
+                Board[] board = result.getData();
+                mAdapter.addAll(Arrays.asList(board));
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ListData<Board>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("SearchFragment", "실패 : " + errorMessage);
+
+            }
+        });
+
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
         listView = (ListView) view.findViewById(R.id.listView);
         mAdapter = new PostAdapter();
@@ -74,16 +103,8 @@ public class SearchResultFragment extends Fragment {
             }
         });
         listView.setAdapter(mAdapter);
-
-        initData();
         return view;
     }
 
-
-    private void initData() {
-
-        mAdapter.addAll(items);
-
-    }
 
 }

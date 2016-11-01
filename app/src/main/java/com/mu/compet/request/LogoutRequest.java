@@ -1,6 +1,7 @@
 package com.mu.compet.request;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 import com.mu.compet.data.ResultMessage;
@@ -35,6 +36,9 @@ public class LogoutRequest extends AbstractRequest<ResultMessage> {
                 .url(url)
                 .tag(context)
                 .build();
+
+        Log.i("url", mRequest.url().toString());
+
 
     }
 

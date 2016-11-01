@@ -9,10 +9,8 @@ import com.mu.compet.data.ListData;
 
 import java.lang.reflect.Type;
 
-import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 
 /**
  * Created by Tacademy on 2016-08-29.
@@ -36,16 +34,12 @@ public class SearchBoardRequest extends AbstractRequest<ListData<Board>> {
                 .addPathSegment(BOARDS)
                 .addPathSegment(pageNum)
                 .addPathSegment(lastBoardNum)
-                .build();
-
-        RequestBody body = new FormBody.Builder()
-                .add(SEARCH_TYPE, searchType)
-                .add(KEYWORD, keyWord)
+                .addQueryParameter(SEARCH_TYPE, searchType)
+                .addQueryParameter(KEYWORD, keyWord)
                 .build();
 
         mRequest = new Request.Builder()
                 .url(url)
-                .post(body)
                 .tag(context)
                 .build();
         Log.i("url", mRequest.url().toString());

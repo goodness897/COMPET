@@ -6,6 +6,7 @@
 
 
     <LinearLayout
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -29,16 +30,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:text="멍멍이" />
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 android:id="@+id/text_post_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="8dp"
-                android:gravity="bottom|right"
-                android:text="2016년 10월 19일" />
+                android:gravity="bottom|right" />
 
         </LinearLayout>
 
@@ -49,6 +48,7 @@
             android:layout_marginTop="8dp">
 
             <ImageView
+                android:layout_below="@+id/text_post_content"
                 android:id="@+id/image_post_first_image"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -79,46 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/image_comment"
                 android:layout_marginBottom="8dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:text="멍멍이랑 같이 자는 중" />
-
-            <ImageView
-                android:id="@+id/image_comment"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/image_post_third_image"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                app:srcCompat="@drawable/ic_comment" />
-
-            <TextView
-                android:id="@+id/text_image_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/image_post_third_image"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="@color/postCount"
-                android:padding="8dp"
-                android:text="+2"
-                android:textColor="@color/brightCoolGray"
-                android:textSize="40sp" />
-
-            <TextView
-                android:id="@+id/text_comment_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/text_post_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toEndOf="@+id/image_comment"
-                android:layout_toRightOf="@+id/image_comment"
-                android:text="+5" />
-
+                android:layout_marginLeft="@dimen/drawable_padding_left"
+                android:layout_marginTop="8dp" />
 
         </RelativeLayout>
     </LinearLayout>

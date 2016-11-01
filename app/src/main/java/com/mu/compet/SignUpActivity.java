@@ -31,8 +31,8 @@ import com.mu.compet.data.ResultMessage;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.IdDuplicateCheckRequest;
+import com.mu.compet.request.NewSignUpRequest;
 import com.mu.compet.request.NickNameDuplicateCheckRequest;
-import com.mu.compet.request.SignUpRequest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -62,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private String mCurrentPhotoPath;
     private Uri contentUri;
+    private File userFile;
 
 
     @Override
@@ -96,9 +97,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void addPictureClicked(View view) {
         // 갤러리를 통한 이미지 가져오기
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        startActivityForResult(intent, RC_GET_IMAGE);
+        Intent intent = new Intent(SignUpActivity.this, AddImageActivity.class);
         startActivityForResult(intent, RC_GET_IMAGE);
-
     }
 
     public void addCameraClicked(View view) {
@@ -193,15 +195,19 @@ public class SignUpActivity extends AppCompatActivity {
 
         String userId = editId.getText().toString();
         String userPass = editPassword.getText().toString();
-        String userNick = editNickName.getText().toString();
-        File userFile = new File(mCurrentPhotoPath);
+        String userNick = "ddd";
+//        if(!TextUtils.isEmpty(mCurrentPhotoPath)) {
+//            userFile = new File(mCurrentPhotoPath);
+//        }
+        Log.d("SignUpActivity", "파일 : " + userFile.getAbsolutePath());
 
-        SignUpRequest request = new SignUpRequest(this, userId, userPass, userNick, userFile);
+
+        NewSignUpRequest request = new NewSignUpRequest(this, userId, userPass, userNick, userFile);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
             @Override
             public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
 
-                Log.d("result", "성공 : " + result.getCode());
+                Log.d("SignUpActivity", "성공 : " + result.getCode());
                 Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -211,7 +217,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
-                Log.d("result", "실패 : " + errorCode);
+                Log.d("SignUpActivity", "실패 : " + errorCode);
 
 
             }
@@ -261,8 +267,24 @@ public class SignUpActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
+
                 case RC_GET_IMAGE:
-                    contentUri = intent.getData();
+                    StringBuilder str = new StringBuilder();
+                    if (resultCode == RESULT_OK) {
+                        String[] files = intent.getStringArrayExtra("files");
+                        for (String s : files) {
+                            Log.i("ImageFiles", "files : " + s);
+                            str.append(s);
+                        }
+                        String fileName = str.toString();
+                        contentUri = Uri.fromFile(new File(fileName));
+                        cropImage(contentUri);
+                    }
+
+                    break;
+//                case RC_GET_IMAGE:
+//                    Log.d("SignUpActivity", "uri : " + contentUri);
+//                    contentUri = intent.getData();
                 case RC_CAMERA:
                     rotatePhoto();
                     cropImage(contentUri);
@@ -275,9 +297,9 @@ public class SignUpActivity extends AppCompatActivity {
                         imageProfile.setImageBitmap(circleBitmap);
 
                         if (mCurrentPhotoPath != null) {
-                            File f = new File(mCurrentPhotoPath);
-                            if (f.exists()) {
-                                f.delete();
+                            userFile = new File(mCurrentPhotoPath);
+                            if (userFile.exists()) {
+                                userFile.delete();
                             }
 //                            mCurrentPhotoPath = null;
                         }

@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mu.compet.data.Board;
+import com.mu.compet.data.ListData;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.ListBoardRequest;
@@ -87,19 +88,18 @@ public class HomeFragment extends Fragment {
     private void initData() {
 
         ListBoardRequest request = new ListBoardRequest(getContext(), "1", "1");
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<Board[]>() {
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<Board>>() {
             @Override
-            public void onSuccess(NetworkRequest<Board[]> request, Board[] result) {
-                mAdapter.addAll(Arrays.asList(result));
-
+            public void onSuccess(NetworkRequest<ListData<Board>> request, ListData<Board> result) {
+                Board[] boards = result.getData();
+                mAdapter.addAll(Arrays.asList(boards));
             }
 
             @Override
-            public void onFail(NetworkRequest<Board[]> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<ListData<Board>> request, int errorCode, String errorMessage, Throwable e) {
 
             }
         });
-
     }
 
 }

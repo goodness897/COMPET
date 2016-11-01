@@ -34,7 +34,6 @@ public class UpdatePostActivity extends AppCompatActivity {
         initToolBar(getString(R.string.activity_update_post));
         Intent intent = getIntent();
         board = (Board) intent.getSerializableExtra("board");
-        contentEdit.setText(board.getBoardContent());
 
 
     }
@@ -76,6 +75,7 @@ public class UpdatePostActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
                     Log.d(TAG, result.getMessage());
+                    finish();
                 }
 
                 @Override

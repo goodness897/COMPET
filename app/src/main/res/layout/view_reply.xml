@@ -26,12 +26,12 @@
 
     <ViewSwitcher
         android:id="@+id/view_switcher"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/image_profile"
+        android:layout_below="@+id/text_nickname"
         android:layout_alignLeft="@+id/text_nickname"
         android:layout_alignStart="@+id/text_nickname"
-        android:layout_marginTop="48dp">
+        android:layout_marginTop="16dp">
 
         <TextView
             android:id="@+id/text_comment_content"
@@ -42,7 +42,9 @@
         <EditText
             android:id="@+id/edit_comment_content"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textSize="14sp"/>
 
     </ViewSwitcher>
 
@@ -57,24 +59,43 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:text="TextView" />
 
-    <ImageButton
-        android:id="@+id/btn_delete_reply"
+    <ViewSwitcher
+        android:id="@+id/view_update_switcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/text_time"
-        android:layout_alignRight="@+id/text_time"
         android:layout_alignTop="@+id/view_switcher"
-        android:background="@null"
-        app:srcCompat="@drawable/ic_user_select" />
+        android:layout_alignLeft="@+id/text_time"
+        android:layout_alignStart="@+id/text_time">
 
-    <ImageButton
-        android:id="@+id/btn_update_reply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btn_delete_reply"
-        android:layout_marginRight="8dp"
-        android:layout_toLeftOf="@+id/btn_delete_reply"
-        android:layout_toStartOf="@+id/btn_delete_reply"
-        android:background="@null"
-        app:srcCompat="@drawable/ic_write_select" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_delete_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_user_select" />
+
+            <ImageButton
+                android:id="@+id/btn_update_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+
+                android:background="@null"
+                app:srcCompat="@drawable/ic_write_select" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정"/>
+    </ViewSwitcher>
+
+
 </RelativeLayout>

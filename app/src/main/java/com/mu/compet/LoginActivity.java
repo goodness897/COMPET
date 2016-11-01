@@ -17,6 +17,11 @@ import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
 import com.mu.compet.request.LoginRequest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText inputId;
@@ -52,6 +57,33 @@ public class LoginActivity extends AppCompatActivity {
         id = inputId.getText().toString();
         passWord = inputPassword.getText().toString();
 
+        exampleDate();
+
+    }
+
+    private void exampleDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd kk:mm", Locale.KOREA);
+        Date startDate = null;
+        try {
+            startDate = dateFormat.parse("2016.10.31 18:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date endDate = null;
+        try {
+            endDate = dateFormat.parse("2016.10.31 23:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long duration = (endDate.getTime() - startDate.getTime()) / 1000;
+        if(duration / (60 * 60 * 24) == 0) {
+            duration = duration / (60 * 60);
+            Log.d("LoginActivity", duration + "시간 전");
+        } else {
+            duration = duration / (60 * 60 * 24);
+            Log.d("LoginActivity", duration + "일 전");
+
+        }
     }
 
     private void showPassword() {
@@ -102,11 +134,7 @@ public class LoginActivity extends AppCompatActivity {
     public void loginButtonClicked(View view) {
 
 
-//        loginRequest();
-
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        loginRequest();
 
     }
 
@@ -124,6 +152,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
                 Log.d("LoginActivity", "성공 : " + result.getMessage());
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
 
             }
 

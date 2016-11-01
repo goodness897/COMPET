@@ -159,7 +159,6 @@ public class UpdateMyProfileActivity extends AppCompatActivity {
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
                     Log.d("UpdateMyProfileActivity", "성공 : " + result.getMessage());
                     finish();
-
                 }
 
                 @Override

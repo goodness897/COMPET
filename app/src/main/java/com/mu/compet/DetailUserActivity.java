@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.mu.compet.data.Board;
 import com.mu.compet.data.User;
 import com.mu.compet.data.UserItemData;
 import com.mu.compet.manager.NetworkManager;
 import com.mu.compet.manager.NetworkRequest;
+import com.mu.compet.request.AbstractRequest;
 import com.mu.compet.request.DetailUserRequest;
 
 import static com.mu.compet.MyApplication.getContext;
@@ -27,7 +30,7 @@ public class DetailUserActivity extends AppCompatActivity {
     ImageView profileImageView;
     private String userId;
     FragmentTabHost tabHost;
-    User user;
+    Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class DetailUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_user);
 
         Intent intent = getIntent();
-        user = (User)intent.getSerializableExtra("board");
+        board = (Board)intent.getSerializableExtra("board");
 
         nickNameView = (TextView) findViewById(R.id.text_nickname);
         postCountView = (TextView) findViewById(R.id.text_post_count);
@@ -46,12 +49,12 @@ public class DetailUserActivity extends AppCompatActivity {
 
         tabHost.addTab(tabHost.newTabSpec("tab1")
                         .setIndicator(getTabIndicator(getContext(), R.drawable.my_list_tab_selector))
-                , UserAllPostFragment.newInstance().getClass(), null);
+                , UserAllPostFragment.newInstance(board.getUserNick()).getClass(), null);
         tabHost.addTab(tabHost.newTabSpec("tab2")
                         .setIndicator(getTabIndicator(getContext(), R.drawable.my_picture_tab_selector))
                 , UserOnlyPictureFragment.newInstance().getClass(), null);
 
-        initData(String.valueOf(user.getUserNum()));
+        initData(String.valueOf(board.getUserNum()));
 
     }
 
@@ -79,11 +82,16 @@ public class DetailUserActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void setUserData(User user) {
+        String fileUrl = "http://" + AbstractRequest.getHOST() +":" + AbstractRequest.getHttpPort()
+                + "/user/" + board.getUserNum() + "/image";
         nickNameView.setText(user.getUserNick());
-        initToolBar(userId);
+        initToolBar(user.getUserId());
         if(user.getUserFile() != null) {
-            Glide.with(profileImageView.getContext()).load("http://" + user.getUserFile()).into(profileImageView);
+            Log.d("DetailUserActivity", fileUrl);
+            Glide.with(profileImageView.getContext()).load(fileUrl).into(profileImageView);
 
         }
     }
