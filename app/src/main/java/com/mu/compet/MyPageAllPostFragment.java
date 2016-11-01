@@ -19,8 +19,8 @@ import com.mu.compet.data.Board;
  */
 public class MyPageAllPostFragment extends Fragment {
 
-    ListView listView;
-    MyPostAdapter mAdapter;
+    private ListView listView;
+    private MyPostAdapter mAdapter;
 
 
     public MyPageAllPostFragment() {

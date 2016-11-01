@@ -39,13 +39,14 @@ public class UserOnlyPictureFragment extends Fragment {
             R.drawable.image_sample_post03, R.drawable.image_sample_post04,
             R.drawable.image_sample_post01, R.drawable.image_sample_post02,
             R.drawable.image_sample_post03, R.drawable.image_sample_post04};
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_page_only_picture, container, false);
         MyPageGridAdapter mAdapter = new MyPageGridAdapter(getContext(), R.layout.view_my_page_only_image, img);
-        GridView gridView = (GridView)view.findViewById(R.id.gridView);
+        GridView gridView = (GridView) view.findViewById(R.id.gridView);
         gridView.setAdapter(mAdapter);
 
 

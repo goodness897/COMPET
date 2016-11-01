@@ -23,8 +23,8 @@ import java.util.Arrays;
 
 public class HomeFragment extends Fragment {
 
-    ListView listView;
-    PostAdapter mAdapter;
+    private ListView listView;
+    private PostAdapter mAdapter;
 
     public HomeFragment() {
         // Required empty public constructor

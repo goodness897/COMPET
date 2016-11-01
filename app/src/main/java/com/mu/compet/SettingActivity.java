@@ -19,7 +19,7 @@ import com.mu.compet.request.LogoutRequest;
 
 public class SettingActivity extends AppCompatActivity {
 
-    AlertDialog.Builder builder;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

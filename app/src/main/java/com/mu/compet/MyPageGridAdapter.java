@@ -13,17 +13,18 @@ import android.widget.ImageView;
 
 public class MyPageGridAdapter extends BaseAdapter {
 
-    Context context;
-    int layout;
-    int img[];
-    LayoutInflater inflater;
+    private Context context;
+    private int layout;
+    private int img[];
+    private LayoutInflater inflater;
 
     public MyPageGridAdapter(Context context, int layout, int[] img) {
         this.context = context;
         this.layout = layout;
         this.img = img;
-        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return img.length;
@@ -41,9 +42,9 @@ public class MyPageGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView==null)
+        if (convertView == null)
             convertView = inflater.inflate(layout, null);
-        ImageView iv = (ImageView)convertView.findViewById(R.id.image);
+        ImageView iv = (ImageView) convertView.findViewById(R.id.image);
         iv.setImageResource(img[position]);
 
         return convertView;

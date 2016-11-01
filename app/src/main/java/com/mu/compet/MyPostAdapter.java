@@ -27,7 +27,7 @@ public class MyPostAdapter extends BaseAdapter {
     private ImageView commentImageView;
     private TextView commentCountView;
     private RelativeLayout layout;
-    Board board;
+    private Board board;
 
 
     public void add(Board board) {

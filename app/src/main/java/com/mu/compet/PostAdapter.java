@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class PostAdapter extends BaseAdapter {
     private List<Board> items = new ArrayList<>();
-    Board board;
+    private Board board;
 
     private ImageView profileImageView;
     private TextView nickNameTextView;

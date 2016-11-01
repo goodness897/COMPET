@@ -11,6 +11,9 @@ import android.widget.ImageView;
  */
 public class ImageCheckView extends FrameLayout implements Checkable {
 
+    private ImageView checkView;
+
+
     public ImageCheckView(Context context) {
         super(context);
         init();
@@ -21,13 +24,13 @@ public class ImageCheckView extends FrameLayout implements Checkable {
         init();
     }
 
-    ImageView checkView;
     private void init() {
         inflate(getContext(), R.layout.view_check, this);
-        checkView = (ImageView)findViewById(R.id.image_check);
+        checkView = (ImageView) findViewById(R.id.image_check);
     }
 
     boolean isChecked = false;
+
     private void drawCheck() {
         if (isChecked) {
             checkView.setImageResource(R.drawable.ic_checkbox_on);

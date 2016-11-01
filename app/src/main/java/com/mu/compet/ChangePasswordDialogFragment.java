@@ -27,12 +27,12 @@ import com.mu.compet.request.UpdateUserPasswordRequest;
  */
 public class ChangePasswordDialogFragment extends DialogFragment {
 
-    TextView cancelText;
-    TextView completeText;
+    private TextView cancelText;
+    private TextView completeText;
 
-    EditText oldPasswordView;
-    EditText newPasswordView;
-    EditText newCheckPasswordView;
+    private EditText oldPasswordView;
+    private EditText newPasswordView;
+    private EditText newCheckPasswordView;
 
 
     public ChangePasswordDialogFragment() {

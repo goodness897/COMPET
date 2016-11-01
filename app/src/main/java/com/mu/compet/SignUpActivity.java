@@ -50,15 +50,15 @@ public class SignUpActivity extends AppCompatActivity {
     private static final int RC_CAMERA = 2;
     private static final int RC_CROP = 3;
 
-    ImageView imageProfile;
-    ImageView imageCamera;
+    private ImageView imageProfile;
+    private ImageView imageCamera;
 
-    EditText editId;
-    EditText editNickName;
-    EditText editPassword;
-    EditText editPasswordCheck;
+    private EditText editId;
+    private EditText editNickName;
+    private EditText editPassword;
+    private EditText editPasswordCheck;
 
-    Button completeButton;
+    private Button completeButton;
 
     private String mCurrentPhotoPath;
     private Uri contentUri;

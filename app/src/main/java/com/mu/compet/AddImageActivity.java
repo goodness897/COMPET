@@ -27,12 +27,12 @@ import java.util.List;
 
 public class AddImageActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    String[] projection = {MediaStore.Images.Media._ID,
+    private String[] projection = {MediaStore.Images.Media._ID,
             MediaStore.Images.Media.DISPLAY_NAME,
             MediaStore.Images.Media.DATA};
-    String sort = MediaStore.Images.Media.DATE_ADDED + " DESC";
-    GridView gridView;
-    SimpleCursorAdapter mAdapter;
+    private String sort = MediaStore.Images.Media.DATE_ADDED + " DESC";
+    private GridView gridView;
+    private SimpleCursorAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

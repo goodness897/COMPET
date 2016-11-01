@@ -23,8 +23,8 @@ import android.widget.TextView;
 public class SearchFragment extends Fragment {
 
     //    Spinner typeSpinner;
-    EditText keywordInputEditText;
-    Button cancelButton;
+    private EditText keywordInputEditText;
+    private Button cancelButton;
 
 
     public SearchFragment() {

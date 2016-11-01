@@ -9,6 +9,7 @@ import com.mu.compet.MyApplication;
  * Created by Tacademy on 2016-08-23.
  */
 public class PropertyManager {
+
     private static PropertyManager instance;
     public static PropertyManager getInstance() {
         if (instance == null) {

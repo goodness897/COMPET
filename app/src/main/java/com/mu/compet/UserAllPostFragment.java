@@ -26,8 +26,8 @@ import java.util.Arrays;
  */
 public class UserAllPostFragment extends Fragment {
 
-    ListView listView;
-    MyPostAdapter mAdapter;
+    private ListView listView;
+    private MyPostAdapter mAdapter;
 
 
     public UserAllPostFragment() {

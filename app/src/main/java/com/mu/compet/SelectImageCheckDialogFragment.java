@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 
-import java.io.File;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,11 +22,9 @@ import java.io.File;
  */
 public class SelectImageCheckDialogFragment extends DialogFragment {
 
-    TextView galleryText;
-    TextView cameraText;
+    private TextView galleryText;
+    private TextView cameraText;
 
-    private String img_file_path;
-    File mSavedFile, mContentFile;
     private static final int RC_GET_IMAGE = 1;
     private static final int RC_CAMERA = 2;
 

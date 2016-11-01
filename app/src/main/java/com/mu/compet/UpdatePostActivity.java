@@ -23,8 +23,8 @@ public class UpdatePostActivity extends AppCompatActivity {
 
     private String TAG = "UpdatePostActivity";
 
-    EditText contentEdit;
-    Board board;
+    private EditText contentEdit;
+    private Board board;
 
 
     @Override
