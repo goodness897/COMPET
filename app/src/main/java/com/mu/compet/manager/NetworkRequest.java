@@ -100,5 +100,4 @@ public abstract class NetworkRequest<T> implements Callback {
             listener.onFail(this, code, errorMessage, exception);
         }
     }
-
 }

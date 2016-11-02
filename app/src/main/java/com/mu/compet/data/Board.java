@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Mu on 2016-10-20.
  */
 
-public class Board implements Serializable{
+public class Board implements Serializable {
 
     private int userNum;
     private String userId;

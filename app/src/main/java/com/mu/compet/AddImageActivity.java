@@ -19,9 +19,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +48,10 @@ public class AddImageActivity extends AppCompatActivity implements LoaderManager
                 if (columnIndex == dataColumnIndex) {
                     String path = cursor.getString(columnIndex);
                     ImageView iv = (ImageView) view;
-                    Glide.with(AddImageActivity.this)
-                            .load(new File(path))
-                            .into(iv);
+
+//                    Glide.with(AddImageActivity.this)
+//                            .load(new File(path))
+//                            .into(iv);
                     return true;
                 }
                 return false;

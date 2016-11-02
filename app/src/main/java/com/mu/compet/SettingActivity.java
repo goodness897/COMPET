@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,6 +33,13 @@ public class SettingActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.dialog_change_password, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setView(dialogView);
+                
+
                 DialogFragment dialogFragment = new ChangePasswordDialogFragment();
                 dialogFragment.show(getSupportFragmentManager(), "change password");
 

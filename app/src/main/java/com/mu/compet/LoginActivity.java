@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
         inputId = (EditText) findViewById(R.id.edit_id);
         inputPassword = (EditText) findViewById(R.id.edit_password);
         loginButton = (Button) findViewById(R.id.btn_login);
@@ -62,10 +61,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void exampleDate() {
+
+        Date date = new Date();
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd kk:mm", Locale.KOREA);
         Date startDate = null;
         try {
-            startDate = dateFormat.parse("2016.10.31 18:00");
+            startDate = dateFormat.parse("2016.10.29 18:00");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -88,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showPassword() {
 
-        if (isShowPass) { // 비밀번호 형식보인다면
+        if (isShowPass) { // 비밀번호 형식 보인다면
             inputPassword.setInputType(129);
             passwordVisibleView.setText(R.string.Look);
             isShowPass = false;
@@ -132,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginButtonClicked(View view) {
-
 
         loginRequest();
 
