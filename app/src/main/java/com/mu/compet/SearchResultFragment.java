@@ -25,9 +25,10 @@ import java.util.Arrays;
  * create an instance of this fragment.
  */
 public class SearchResultFragment extends Fragment {
-    ListView listView;
-    PostAdapter mAdapter;
-    String keyWord;
+
+    private ListView listView;
+    private PostAdapter mAdapter;
+    private String keyWord;
 
 
     public SearchResultFragment() {

@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class ReplyAdapter extends BaseAdapter {
     private List<Reply> items = new ArrayList<>();
-    Reply reply;
+    private Reply reply;
 
     private ImageView profileImageView;
     private TextView nickNameTextView;

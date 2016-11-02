@@ -26,7 +26,7 @@ import android.widget.TextView;
  */
 public class MyPageFragment extends Fragment {
 
-    FragmentTabHost tabHost;
+    private FragmentTabHost tabHost;
 
 
     public MyPageFragment() {

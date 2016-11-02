@@ -12,9 +12,9 @@ import static com.mu.compet.R.id.imageView;
 
 public class SplashActivity extends AppCompatActivity {
 
-    ImageView animImageView;
-    AnimationDrawable anim;
-    Handler mHandler = new Handler(Looper.getMainLooper());
+    private  ImageView animImageView;
+    private AnimationDrawable anim;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

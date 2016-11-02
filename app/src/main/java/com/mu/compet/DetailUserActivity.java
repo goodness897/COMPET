@@ -25,12 +25,12 @@ import static com.mu.compet.MyApplication.getContext;
 
 public class DetailUserActivity extends AppCompatActivity {
 
-    TextView nickNameView;
-    TextView postCountView;
-    ImageView profileImageView;
+    private TextView nickNameView;
+    private TextView postCountView;
+    private ImageView profileImageView;
     private String userId;
-    FragmentTabHost tabHost;
-    Board board;
+    private FragmentTabHost tabHost;
+    private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +70,13 @@ public class DetailUserActivity extends AppCompatActivity {
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<UserItemData>() {
             @Override
             public void onSuccess(NetworkRequest<UserItemData> request, UserItemData result) {
+                Log.d("DetailUserActivity", "성공 : " + result.getMessage());
                 User user = result.getData();
                 setUserData(user);
-
             }
-
             @Override
             public void onFail(NetworkRequest<UserItemData> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("DetailUserActivity", "성공 : " + errorMessage);
 
             }
         });

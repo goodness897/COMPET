@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    FragmentTabHost tabHost;
+    private FragmentTabHost tabHost;
     private long backKeyPressedTime = 0;
 
     @Override

@@ -31,20 +31,20 @@ public class DetailBoardActivity extends AppCompatActivity {
 
     private String TAG = "DetailBoardActivity";
 
-    ListView listView;
-    ReplyAdapter mAdapter;
-    EditText replyEdit;
-    Button writeButton;
+    private ListView listView;
+    private ReplyAdapter mAdapter;
+    private EditText replyEdit;
+    private Button writeButton;
 
-    ImageView profileImage;
-    TextView nickNameText;
-    TextView postDateText;
-    ImageView firstImage;
-    ImageView secondImage;
-    ImageView thirdImage;
-    TextView contentText;
+    private ImageView profileImage;
+    private TextView nickNameText;
+    private TextView postDateText;
+    private ImageView firstImage;
+    private ImageView secondImage;
+    private ImageView thirdImage;
+    private TextView contentText;
 
-    Board board;
+    private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

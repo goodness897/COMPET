@@ -33,19 +33,19 @@ import java.io.File;
 
 public class UpdateMyProfileActivity extends AppCompatActivity {
 
-    EditText nickNameEditText;
-    TextView changeImageText;
+    private EditText nickNameEditText;
+    private TextView changeImageText;
 
     private String img_file_path;
-    File mSavedFile, mContentFile;
+    private File mSavedFile, mContentFile;
     private static final int RC_GET_IMAGE = 1;
     private static final int RC_CAMERA = 2;
 
-    File userFile = null;
+    private File userFile = null;
 
-    ImageView profileView;
+    private ImageView profileView;
 
-    SelectImageCheckDialogFragment dialogFragment;
+    private SelectImageCheckDialogFragment dialogFragment;
 
 
     @Override

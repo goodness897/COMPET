@@ -32,16 +32,16 @@ import java.io.File;
 
 public class NewWriteActivity extends AppCompatActivity {
 
-    File mSavedFile, mContentFile;
+    private File mSavedFile, mContentFile;
     private static final int RC_GET_IMAGE = 1;
     private static final int RC_CAMERA = 2;
-    ImageView firstImage;
-    ImageView secondImage;
-    ImageView thirdImage;
-    ImageView[] imageViews;
-    File[] files;
+    private ImageView firstImage;
+    private  ImageView secondImage;
+    private ImageView thirdImage;
+    private ImageView[] imageViews;
+    private File[] files;
 
-    EditText editContent;
+    private EditText editContent;
 
 
     @Override

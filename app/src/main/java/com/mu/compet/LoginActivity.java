@@ -24,15 +24,15 @@ import java.util.Locale;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText inputId;
-    EditText inputPassword;
-    Button loginButton;
-    Button signUpButton;
-    TextView passwordVisibleView;
+    private EditText inputId;
+    private EditText inputPassword;
+    private Button loginButton;
+    private Button signUpButton;
+    private TextView passwordVisibleView;
 
-    String id;
-    String passWord;
-    boolean isShowPass = false;
+    private String id;
+    private String passWord;
+    private boolean isShowPass = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
